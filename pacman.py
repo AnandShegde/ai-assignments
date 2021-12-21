@@ -1,6 +1,6 @@
 
 dfs_stop= False
-m= 11
+
 
 dfs_stop= False    
 # tells when dfs to stop
@@ -139,6 +139,7 @@ def dfid(graph_input,v=(0,0)):
         # if DFIDstop: return
         path,statesdfid =DFID(graph_input, depth)
         depth+=1
+    print("sojeioj")
     return path,statesdfid
     
 
@@ -212,18 +213,35 @@ def movegen(bdd,graph_input):
     for i in path:
         graph_input[i[0]][i[1]]= '0'
     
+    
     return graph_input,states,len(path)
 
 
 
 
 
-
-bdd= int(input())
+m=11
 graph_input= []
-for i in range(m):
-    graph_input.append(list(input()))
 
+# bdd= int(input())
+# for i in range(m):
+#     graph_input.append(list(input()))
+
+
+
+file = open("input.txt","r")
+bdd=0
+lines= file.readlines()
+m=len(lines)
+bdd= int(lines[0])
+for i in range(1,m):
+    
+    m = m+1
+    st = lines[i]
+    graph_input.append(list(st[:len(st)-1]))
+    print(st[:len(st)-1])
+
+print(graph_input)
 n=len(graph_input[0])
 current_position=[0,0]
 graph_input,states,pathlength= movegen(bdd,graph_input)
