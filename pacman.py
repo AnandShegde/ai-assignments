@@ -1,15 +1,25 @@
-dfs_stop= False
+dfs_stop= False    
+# tells when dfs to stop
+
 goaldfs= (0,0)
+# target state to achieve
+
 statesdfs=0
+# no. of states explored during dfs traversal
+
+
+
 def goal_state(i,j,graph_input):
+    # This function determines whether the coordinate (i,j) is the end goal for the pacman or not .
     if(graph_input[i][j]=='*'):
-        return (i,j)
+        return True
     else:
         return False
 
 
 
 def move_gen(i,j,graph_input):
+    # returning all possible moves available to the pacman .
     templist=[]
     if(i<n-1):
         if(graph_input[i+1][j]==' ' or graph_input[i+1][j]=='*'):
@@ -31,17 +41,16 @@ def DFSUtil(v, visited,parent,graph_input):
     global dfs_stop,goaldfs,statesdfs
     if dfs_stop:
         return
-        
 
     visited.add(v)
     
     templist = move_gen(v[0],v[1],graph_input)
 
+    statesdfs+=1
 
     for neighbour in templist:
         if neighbour not in visited:
             parent[neighbour]=v
-            statesdfs+=1
             if goal_state(neighbour[0],neighbour[1],graph_input):
                 goaldfs= neighbour
                 dfs_stop= True
@@ -111,6 +120,7 @@ def bfs(graph_input,s=(0,0)):
                 states +=1
                 queue.append(i)
                 Parents[i]=s
+                print(f"{i}={Parents[i]}")
                 visited[i] = True
                 if(goal_state(i[0],i[1],graph_input)): 
                     end=1
@@ -151,7 +161,7 @@ def movegen(bdd,graph_input):
 
 
 bdd= int(input())
-m= 11
+m = 11
 graph_input= []
 for i in range(m):
     graph_input.append(list(input()))
