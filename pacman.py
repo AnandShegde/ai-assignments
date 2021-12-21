@@ -1,8 +1,9 @@
+import time,sys
+sys.setrecursionlimit(10**6)
 
+starttime= time.time()
 dfs_stop= False
-m= 11
 
-import time
 
 dfs_stop= False    
 # tells when dfs to stop
@@ -86,7 +87,6 @@ def DFS(graph_input,v=(0,0)):
     while x!=(0,0):
         path.append(parent[x])
         x= parent[x]
-    print(path)
     return path,statesdfs  
 
 def DFID(graph_input, depth,v=(0,0)):
@@ -181,7 +181,7 @@ def bfs(graph_input,s=(0,0)):
                 states +=1
                 queue.append(i)
                 Parents[i]=s
-                print(f"{i}={Parents[i]}")
+               
                 visited[i] = True
                 if(goal_state(i[0],i[1],graph_input)): 
                     end=1
@@ -198,7 +198,7 @@ def bfs(graph_input,s=(0,0)):
     return path,states
 
 
-def inputcheck(bdd,graph_input):  
+def movegen(bdd,graph_input):  
     if bdd==0 :
         #bfs
         print("bfs")
@@ -212,14 +212,8 @@ def inputcheck(bdd,graph_input):
         path,states= dfid(graph_input)
         print("dfid")
 
-    def Reverse(lst):
-        return [ele for ele in reversed(lst)]
-    for i in Reverse(path):
+    for i in path:
         graph_input[i[0]][i[1]]= '0'
-        time.sleep(0.1)
-        for i in graph_input:
-            print(*i,sep='')
-            strin= ''.join(map(str,i))
     
     return graph_input,states,len(path)
 
@@ -227,22 +221,39 @@ def inputcheck(bdd,graph_input):
 
 
 
-
-bdd= int(input())
+m=11
 graph_input= []
-for i in range(m):
-    graph_input.append(list(input()))
 
+# bdd= int(input())
+# for i in range(m):
+#     graph_input.append(list(input()))
+
+
+
+file = open("input.txt","r")
+bdd=0
+lines= file.readlines()
+m=len(lines)
+bdd= int(lines[0])
+for i in range(1,m):
+    
+    m = m+1
+    st = lines[i]
+    graph_input.append(list(st[:len(st)-1]))
+    #print(st[:len(st)-1])
+
+# print(graph_input)
 n=len(graph_input[0])
-
-graph_input,states,pathlength= inputcheck(bdd,graph_input)
+current_position=[0,0]
+graph_input,states,pathlength= movegen(bdd,graph_input)
 f = open("output.txt","w")
+f.write(f"states= {states+1}, path length= {pathlength-1} \n")
 for i in graph_input:
-    print(*i,sep='')
+    #print(*i,sep='')
     strin= ''.join(map(str,i))
     f.write(strin+"\n")
 f.close()
-print(f"states= {states+1}, path length= {pathlength-1} ")
+print(f"time taken = {time.time()-starttime} ")
 
 
     
