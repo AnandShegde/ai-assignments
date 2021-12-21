@@ -1,4 +1,9 @@
+
+dfs_stop= False
+m= 11
+
 import time
+
 dfs_stop= False    
 # tells when dfs to stop
 
@@ -7,8 +12,9 @@ goaldfs= (0,0)
 
 statesdfs=0
 # no. of states explored during dfs traversal
-
-
+statesdfid=0
+# no. of states explored during dfid traversal
+DFIDstop= False
 
 def goal_state(i,j,graph_input):
     # This function determines whether the coordinate (i,j) is the end goal for the pacman or not .
@@ -83,10 +89,63 @@ def DFS(graph_input,v=(0,0)):
     print(path)
     return path,statesdfs  
 
+def DFID(graph_input, depth,v=(0,0)):
+    global goaldfs,statesdfid
+    # Create a set to store visited vertices
+    visited = set()
+    parent= {}
+    # Call the recursive helper function
+    # to print DFS traversal
+    DFIDUtil(v, visited,parent,graph_input, depth)  
+    path= [v,goaldfs]
+    x= goaldfs
+    
+    while x!=(0,0):
+        path.append(parent[x])
+        x= parent[x]
+    return path,statesdfid
+
+
+def DFIDUtil(v, visited,parent,graph_input, depth):
+    if depth==0: return
+    global DFIDstop,goaldfs,statesdfid
+    if DFIDstop:
+        return
+        
+
+    visited.add(v)
+    
+    templist = move_gen(v[0],v[1],graph_input)
+
+
+    for neighbour in templist:
+        if depth==0: return
+        if neighbour not in visited:
+            parent[neighbour]=v
+            statesdfid+=1
+            if goal_state(neighbour[0],neighbour[1],graph_input):
+                goaldfs= neighbour
+                DFIDstop= True
+            if DFIDstop:
+                return
+
+            DFIDUtil(neighbour, visited,parent,graph_input, depth-1)
+            if DFIDstop or depth==0:
+                return
+
 
     
     
+def dfid(graph_input,v=(0,0)):
+    depth = 1
+    while not DFIDstop:
+        # if DFIDstop: return
+        path,statesdfid =DFID(graph_input, depth)
+        depth+=1
+    return path,statesdfid
     
+
+
 
 
 
@@ -150,6 +209,7 @@ def inputcheck(bdd,graph_input):
         print("dfs")
     else:
         #dfid
+        path,states= dfid(graph_input)
         print("dfid")
 
     def Reverse(lst):
@@ -169,7 +229,6 @@ def inputcheck(bdd,graph_input):
 
 
 bdd= int(input())
-m = 11
 graph_input= []
 for i in range(m):
     graph_input.append(list(input()))
