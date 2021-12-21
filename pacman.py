@@ -1,3 +1,4 @@
+import time
 dfs_stop= False    
 # tells when dfs to stop
 
@@ -79,6 +80,7 @@ def DFS(graph_input,v=(0,0)):
     while x!=(0,0):
         path.append(parent[x])
         x= parent[x]
+    print(path)
     return path,statesdfs  
 
 
@@ -137,7 +139,7 @@ def bfs(graph_input,s=(0,0)):
     return path,states
 
 
-def movegen(bdd,graph_input):  
+def inputcheck(bdd,graph_input):  
     if bdd==0 :
         #bfs
         print("bfs")
@@ -150,8 +152,14 @@ def movegen(bdd,graph_input):
         #dfid
         print("dfid")
 
-    for i in path:
+    def Reverse(lst):
+        return [ele for ele in reversed(lst)]
+    for i in Reverse(path):
         graph_input[i[0]][i[1]]= '0'
+        time.sleep(0.1)
+        for i in graph_input:
+            print(*i,sep='')
+            strin= ''.join(map(str,i))
     
     return graph_input,states,len(path)
 
@@ -167,8 +175,8 @@ for i in range(m):
     graph_input.append(list(input()))
 
 n=len(graph_input[0])
-current_position=[0,0]
-graph_input,states,pathlength= movegen(bdd,graph_input)
+
+graph_input,states,pathlength= inputcheck(bdd,graph_input)
 f = open("output.txt","w")
 for i in graph_input:
     print(*i,sep='')
