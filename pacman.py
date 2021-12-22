@@ -7,8 +7,8 @@ starttime= time.time()
 
 dfs_stop= False    # tells when dfs to stop
 
-goaldfs= (0,0)     # target state to achieve
-goaldfid= (0,0)
+goaldfs= (0,0)     # target state to achieve for DFS
+goaldfid= (0,0)    # target state to achieve for DFID
 statesdfs=0        # no. of states explored during dfs traversal
 statesdfid=0       # no. of states explored during dfid traversal
 DFIDstop= False    # to break out of recursion
@@ -24,7 +24,7 @@ def goal_state(i,j,graph_input):
 
 def move_gen(i,j,graph_input):
     # returning all possible moves available to the pacman.
-    # if the adjecent block has a space(' ') or astrik('*') 
+    # if the adjecent block has a space(' ') or astrik('*') then ,
     # funtion returns its coordinates
 
     templist=[]
@@ -43,7 +43,7 @@ def move_gen(i,j,graph_input):
     return templist
     
 
-# this is the recursive Dfs utility function
+# this is the recursive DFS utility function
 def DFSUtil(v, visited,parent,graph_input):
 
     global dfs_stop,goaldfs,statesdfs
@@ -70,8 +70,8 @@ def DFSUtil(v, visited,parent,graph_input):
                 return
 
  
-# The function to do DFS traversal. It uses
-# recursive DFSUtil()- dfs utility function
+# The function to do DFS traversal.
+#  It uses recursive DFSUtil()- dfs utility function
 def DFS(graph_input,v=(0,0)):
     global goaldfs,statesdfs
     # Create a set to store visited vertices
@@ -87,7 +87,7 @@ def DFS(graph_input,v=(0,0)):
     while x!=(0,0):
         path.append(parent[x])
         x= parent[x]
-    return path,statesdfs  
+    return path,statesdfs
 
 
 
@@ -208,8 +208,8 @@ def bfs(graph_input,s=(0,0)):
         x= Parents[x]
     return path,states
 
-
-def searchmethod(bdd,graph_input):  
+#simple function to deal with the case wise operation to perform bfs, dfs or dfid as per the requirement
+def searchmethod(bdd,graph_input):
     if bdd==0 :
         #bfs
         print("bfs")
@@ -256,7 +256,7 @@ for i in range(1,m+1):
 n=len(graph_input[0]) # no of coloums
 
 
-# this will give answer
+# this will give the answer
 graph_input,states,pathlength= searchmethod(bdd,graph_input)
 
 
@@ -264,7 +264,7 @@ graph_input,states,pathlength= searchmethod(bdd,graph_input)
 f = open("output.txt","w")
 f.write(f"states= {states+1}, path length= {pathlength-1} \n")
 for i in graph_input:
-    #uncomment the following line to print the answer in the terminal
+    ## Uncomment the following line to print the answer in the terminal
     #print(*i,sep='')
     strin= ''.join(map(str,i))
     f.write(strin+"\n")
