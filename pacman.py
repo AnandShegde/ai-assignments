@@ -1,25 +1,24 @@
-<<<<<<< Updated upstream
-=======
+
 import time,sys
 open_list= set()
 from numpy.core.fromnumeric import shape
 # I take the input from line 243-257
->>>>>>> Stashed changes
+
 
 dfs_stop= False
 
 
-dfs_stop= False    
-# tells when dfs to stop
+sys.setrecursionlimit(10**6)
 
-goaldfs= (0,0)
-# target state to achieve
+starttime= time.time()
 
-statesdfs=0
-# no. of states explored during dfs traversal
-statesdfid=0
-# no. of states explored during dfid traversal
-DFIDstop= False
+dfs_stop= False    # tells when dfs to stop
+
+goaldfs= (0,0)     # target state to achieve for DFS
+goaldfid= (0,0)    # target state to achieve for DFID
+statesdfs=0        # no. of states explored during dfs traversal
+statesdfid=0       # no. of states explored during dfid traversal
+DFIDstop= False    # to break out of recursion
 
 def goal_state(i,j,graph_input):
     # This function determines whether the coordinate (i,j) is the end goal for the pacman or not .
@@ -31,14 +30,11 @@ def goal_state(i,j,graph_input):
 
 
 def move_gen(i,j,graph_input):
-<<<<<<< Updated upstream
-    # returning all possible moves available to the pacman .
-=======
     # returning all possible moves available to the pacman.
     # if the adjecent block has a space(' ') or astrik('*') 
     # funtion returns its coordinates
     global open_list
->>>>>>> Stashed changes
+
     templist=[]
     if(i<n-1):
         if((graph_input[i+1][j]==' ' or graph_input[i+1][j]=='*') and ((i+1,j) not in open_list)):
@@ -55,13 +51,11 @@ def move_gen(i,j,graph_input):
     return templist
     
 
-<<<<<<< Updated upstream
-=======
+
 # this is the recursive Dfs utility function
 def DFSUtil(v, visited,parent,graph_input,open_list):
->>>>>>> Stashed changes
 
-def DFSUtil(v, visited,parent,graph_input):
+
     global dfs_stop,goaldfs,statesdfs
     if dfs_stop:
         return
@@ -93,8 +87,8 @@ def DFSUtil(v, visited,parent,graph_input):
                 return
 
  
-# The function to do DFS traversal. It uses
-# recursive DFSUtil()
+# The function to do DFS traversal.
+#  It uses recursive DFSUtil()- dfs utility function
 def DFS(graph_input,v=(0,0)):
     global goaldfs,statesdfs
     # Create a set to store visited vertices
@@ -113,21 +107,22 @@ def DFS(graph_input,v=(0,0)):
     while x!=(0,0):
         path.append(parent[x])
         x= parent[x]
-    
+
     return path,statesdfs 
 
+
+# The function to do DFID traversal. It uses
+# recursive DFSUtil()- dfs utility function
 def DFID(graph_input, depth,v=(0,0)):
-    global goaldfs,statesdfid
+    global goaldfid,statesdfid
     # Create a set to store visited vertices
     visited = set()
-    parent= {}
+
+    # to store the parent of each node. this is used for path
+    parent= {} 
+
     # Call the recursive helper function
-<<<<<<< Updated upstream
-    # to print DFS traversal
-    DFIDUtil(v, visited,parent,graph_input, depth)  
-    path= [v,goaldfs]
-    x= goaldfs
-=======
+
     DFIDUtil(v, visited,parent,graph_input, depth)   
 
     # the path list, i have added initial state(v=(0,0)) and goaldfs(*) at first
@@ -135,7 +130,8 @@ def DFID(graph_input, depth,v=(0,0)):
 
     
     x= goaldfs # used for traversing the parent nodes
->>>>>>> Stashed changes
+
+
     
     while x!=(0,0):
         
@@ -144,6 +140,8 @@ def DFID(graph_input, depth,v=(0,0)):
     return path,statesdfid
 
 
+
+# this is recursive DFID- utility function
 def DFIDUtil(v, visited,parent,graph_input, depth):
     if depth==0: return
     global DFIDstop,goaldfs,statesdfid,open_list
@@ -176,28 +174,23 @@ def DFIDUtil(v, visited,parent,graph_input, depth):
                 return
 
 
-    
-    
+ # main dfid funtion- which calls DFID- which is dfs version for DFID 
+ #the extra thing is the depth here
 def dfid(graph_input,v=(0,0)):
     depth = 1
     global open_list
     while not DFIDstop:
-        # if DFIDstop: return
         path,statesdfid =DFID(graph_input, depth)
         open_list= set()
         depth+=1
-<<<<<<< Updated upstream
-    print("sojeioj")
-=======
-    
->>>>>>> Stashed changes
+
     return path,statesdfid
     
 
 
 
 
-
+# This is simple bfs
 def bfs(graph_input,s=(0,0)):   
     visited={}
     end=0
@@ -214,7 +207,7 @@ def bfs(graph_input,s=(0,0)):
     while queue:
 
         # Dequeue a vertex from
-        # queue and print it
+        # queue 
         s = queue.pop(0)
        
 
@@ -230,7 +223,7 @@ def bfs(graph_input,s=(0,0)):
                 states +=1
                 queue.append(i)
                 Parents[i]=s
-                print(f"{i}={Parents[i]}")
+               
                 visited[i] = True
                 if(goal_state(i[0],i[1],graph_input)): 
                     end=1
@@ -246,8 +239,8 @@ def bfs(graph_input,s=(0,0)):
         x= Parents[x]
     return path,states
 
-
-def movegen(bdd,graph_input):  
+#simple function to deal with the case wise operation to perform bfs, dfs or dfid as per the requirement
+def searchmethod(bdd,graph_input):
     if bdd==0 :
         #bfs
         print("bfs")
@@ -270,43 +263,48 @@ def movegen(bdd,graph_input):
 
 
 
-
-m=11
-graph_input= []
-
+################uncomment the following lines to take input from the terminal###############
+# graph_input= []
+# m=11
 # bdd= int(input())
 # for i in range(m):
 #     graph_input.append(list(input()))
+###############################################################################
 
 
+graph_input= [] #this stores the input given in as a list of lists
 
+#reading file and adding it to graph_input
 file = open("input.txt","r")
-bdd=0
 lines= file.readlines()
-m=len(lines)
-bdd= int(lines[0])
-for i in range(1,m):
-    
-    m = m+1
-    st = lines[i]
+m=len(lines)-1 #no of rows substract 1 because 1st line is bdd
+bdd= int(lines[0]) #bfs/dfs/dfid
+for i in range(1,m+1):
+    st = lines[i] 
     graph_input.append(list(st[:len(st)-1]))
-    print(st[:len(st)-1])
+    
 
-print(graph_input)
-n=len(graph_input[0])
-current_position=[0,0]
-graph_input,states,pathlength= movegen(bdd,graph_input)
+
+n=len(graph_input[0]) # no of coloums
+
+
+# this will give the answer
+graph_input,states,pathlength= searchmethod(bdd,graph_input)
+
+
+
+
+
+
 f = open("output.txt","w")
+f.write(f"states= {states+1}, path length= {pathlength-1} \n")
 for i in graph_input:
-    print(*i,sep='')
+    ## Uncomment the following line to print the answer in the terminal
+    #print(*i,sep='')
     strin= ''.join(map(str,i))
     f.write(strin+"\n")
 f.close()
-<<<<<<< Updated upstream
-print(f"states= {states+1}, path length= {pathlength-1} ")
 
 
-    
-=======
 print(f"time taken = {time.time()-starttime} ")
->>>>>>> Stashed changes
+
