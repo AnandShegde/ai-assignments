@@ -1,5 +1,12 @@
+
 import time,sys
+open_list= set()
+from numpy.core.fromnumeric import shape
 # I take the input from line 243-257
+
+
+dfs_stop= False
+
 
 sys.setrecursionlimit(10**6)
 
@@ -24,48 +31,58 @@ def goal_state(i,j,graph_input):
 
 def move_gen(i,j,graph_input):
     # returning all possible moves available to the pacman.
-    # if the adjecent block has a space(' ') or astrik('*') then ,
+    # if the adjecent block has a space(' ') or astrik('*') 
     # funtion returns its coordinates
+    global open_list
 
     templist=[]
     if(i<n-1):
-        if(graph_input[i+1][j]==' ' or graph_input[i+1][j]=='*'):
+        if((graph_input[i+1][j]==' ' or graph_input[i+1][j]=='*') and ((i+1,j) not in open_list)):
             templist.append((i+1,j))
     if(i>0):
-        if(graph_input[i-1][j]==' 'or graph_input[i-1][j]=='*'):
+        if(graph_input[i-1][j]==' 'or graph_input[i-1][j]=='*') and ((i-1,j) not in open_list):
             templist.append((i-1,j))
     if(j<n-1):
-        if(graph_input[i][j+1]==' 'or graph_input[i][j+1]=='*'):
+        if(graph_input[i][j+1]==' 'or graph_input[i][j+1]=='*')and ((i,j+1) not in open_list):
             templist.append((i,j+1))
     if(j>0):
-        if(graph_input[i][j-1]==' 'or graph_input[i][j-1]=='*'):
+        if(graph_input[i][j-1]==' 'or graph_input[i][j-1]=='*') and ((i+1,j) not in open_list):
             templist.append((i,j-1))
     return templist
     
 
-# this is the recursive DFS utility function
-def DFSUtil(v, visited,parent,graph_input):
+
+# this is the recursive Dfs utility function
+def DFSUtil(v, visited,parent,graph_input,open_list):
+
 
     global dfs_stop,goaldfs,statesdfs
     if dfs_stop:
         return
-
+    
     visited.add(v)
     
     templist = move_gen(v[0],v[1],graph_input)
 
-    statesdfs+=1
 
+    for neighbour in templist: 
+        if neighbour not in open_list:
+            open_list.add(neighbour)
+    statesdfs+=1
     for neighbour in templist:
-        if neighbour not in visited:
+        if neighbour not in parent:
+            
+
             parent[neighbour]=v
+            open_list.add(neighbour)
+            
+
             if goal_state(neighbour[0],neighbour[1],graph_input):
                 goaldfs= neighbour
                 dfs_stop= True
             if dfs_stop:
-                return
-
-            DFSUtil(neighbour, visited,parent,graph_input)
+                return        
+            DFSUtil(neighbour, visited,parent,graph_input,open_list)
             if dfs_stop:
                 return
 
@@ -77,18 +94,21 @@ def DFS(graph_input,v=(0,0)):
     # Create a set to store visited vertices
     visited = set()
     parent= {}
+    
+
     # Call the recursive helper function
     # to print DFS traversal
-    DFSUtil(v, visited,parent,graph_input)  
+    DFSUtil(v, visited,parent,graph_input,open_list)  
 
     path= [v,goaldfs]
     x= goaldfs
+
     
     while x!=(0,0):
         path.append(parent[x])
         x= parent[x]
-    return path,statesdfs
 
+    return path,statesdfs 
 
 
 # The function to do DFID traversal. It uses
@@ -102,15 +122,19 @@ def DFID(graph_input, depth,v=(0,0)):
     parent= {} 
 
     # Call the recursive helper function
+
     DFIDUtil(v, visited,parent,graph_input, depth)   
 
     # the path list, i have added initial state(v=(0,0)) and goaldfs(*) at first
-    path= [v,goaldfid]
+    path= [v,goaldfs]
 
-
+    
     x= goaldfs # used for traversing the parent nodes
+
+
     
     while x!=(0,0):
+        
         path.append(parent[x])
         x= parent[x]
     return path,statesdfid
@@ -120,14 +144,18 @@ def DFID(graph_input, depth,v=(0,0)):
 # this is recursive DFID- utility function
 def DFIDUtil(v, visited,parent,graph_input, depth):
     if depth==0: return
-    global DFIDstop,goaldfs,statesdfid
+    global DFIDstop,goaldfs,statesdfid,open_list
     if DFIDstop:
         return
         
 
+
     visited.add(v)
     
     templist = move_gen(v[0],v[1],graph_input)
+    for neighbour in templist: 
+        if neighbour not in open_list:
+            open_list.add(neighbour)
 
 
     for neighbour in templist:
@@ -150,9 +178,12 @@ def DFIDUtil(v, visited,parent,graph_input, depth):
  #the extra thing is the depth here
 def dfid(graph_input,v=(0,0)):
     depth = 1
+    global open_list
     while not DFIDstop:
         path,statesdfid =DFID(graph_input, depth)
+        open_list= set()
         depth+=1
+
     return path,statesdfid
     
 
@@ -226,6 +257,7 @@ def searchmethod(bdd,graph_input):
     for i in path:
         graph_input[i[0]][i[1]]= '0'
     
+    
     return graph_input,states,len(path)
 
 
@@ -261,6 +293,9 @@ graph_input,states,pathlength= searchmethod(bdd,graph_input)
 
 
 
+
+
+
 f = open("output.txt","w")
 f.write(f"states= {states+1}, path length= {pathlength-1} \n")
 for i in graph_input:
@@ -269,7 +304,7 @@ for i in graph_input:
     strin= ''.join(map(str,i))
     f.write(strin+"\n")
 f.close()
+
+
 print(f"time taken = {time.time()-starttime} ")
 
-
-    
