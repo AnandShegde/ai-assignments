@@ -10,7 +10,7 @@
 \usepackage{amsmath}
 \graphicspath{{C:\Users\tkhal\Desktop\College\Second Yr\Data Analysis EE201\Project\Question 2}}
 
-\title{AI Assignment Report}
+\title{AI Assignment-1 Report}
 \vspace{20pt}
 \vspace{20pt}
 \date{\today}
@@ -73,58 +73,69 @@ Along with applying the above algorithms for the PacMan , we have also set the p
 \end{itemize}
 \newpage
 \section{Pseudo Code}
-The main logic for the code is to find the value of k while determining the type of distribution for $W_i$.
+The main pseudo code used in our assignment is as follows :
+\subsection*{move\_gen function}
 \vspace{5pt}
-\\
 def move\_gen(i,j,graph\_input):
 \vspace{5pt}
-    \\ \hspace*{10pt}global open\_list
+    \\ \hspace*{20pt}global open\_list
     \vspace{2pt}
-    \\ \hspace*{10pt}templist=[]
+    \\ \hspace*{20pt}templist=[]
     \vspace{2pt}
-    \\ \hspace*{10pt}if(i$<$n-1):
+    \\ \hspace*{20pt}if(i$<$n-1):
     \vspace{2pt}
-    \\ \hspace*{20pt}    if((graph\_input[i+1][j]==' ' or graph\_input[i+1][j]=='*') and ((i+1,j) not in open\_list)):
+    \\ \hspace*{30pt}    if((graph\_input[i+1][j]==' ' or '*') and ((i+1 , j) not in open\_list)):
     \vspace{2pt}
-    \\ \hspace*{30pt}        templist.append((i+1,j))
-    if(i>0):
-        if(graph\_input[i-1][j]==' 'or graph\_input[i-1][j]=='*') and ((i-1,j) not in open\_list):
-            templist.append((i-1,j))
-    if(j<n-1):
-        if(graph\_input[i][j+1]==' 'or graph\_input[i][j+1]=='*')and ((i,j+1) not in open\_list):
-            templist.append((i,j+1))
-    if(j>0):
-        if(graph\_input[i][j-1]==' 'or graph\_input[i][j-1]=='*') and ((i+1,j) not in open\_list):
-            templist.append((i,j-1))
-    return templist
-\section*{Logic :}
-Now , we have gone through each case of probable probability distribution functions for $W_i$ ,
-\vspace{5pt}
-\\Next , we must first round of the value of k obtained and check whether the rounded off integer value is $\in \{2,3,4\}$ . 
-\vspace{5pt}
-\\If the value of $ k\in \{2,3,4\}$ then , the test case is labelled {\color{green}successful} but if not the it is labelled {\color{red}unsuccessful}.
-\vspace{5pt}
-\\If multiple test cases are found successful , then the test case which has the least deviation of the value of k from the nearest integer is taken as the true test case
-and is considered for the final answer .
+    \\ \hspace*{40pt}        templist.append((i+1 , j))
+    \vspace{2pt}
+    \\ \hspace*{20pt} if(i$>$0):
+    \vspace{2pt}
+    \\ \hspace*{30pt}    if(graph\_input[i-1][j]==' ' or '*') and ((i-1 , j) not in open\_list):
+    \vspace{2pt}
+    \\ \hspace*{30pt}        templist.append((i-1,j))
+    \vspace{2pt}
+    \\ \hspace*{20pt} if(j$<$n-1):
+    \vspace{2pt}
+    \\ \hspace*{30pt}    if(graph\_input[i][j+1]==' ' or '*') and ((i , j+1) not in open\_list):
+    \vspace{2pt}
+    \\ \hspace*{40pt}        templist.append((i,j+1))
+    \vspace{2pt}
+    \\ \hspace*{20pt} if(j$>$0):
+    \vspace{2pt}
+    \\ \hspace*{30pt}    if(graph\_input[i][j-1]==' ' or '*') and ((i+1 , j) not in open\_list):
+    \vspace{2pt}
+    \\ \hspace*{40pt}        templist.append((i,j-1))
+    \vspace{2pt}
+    \\ \hspace*{20pt}return templist
+\subsection*{goal\_state function}
+    \vspace{5pt}
+    def goal\_state(i,j,graph\_input):
+    \vspace{5pt}
+        \\ \hspace*{20pt}if(graph\_input[i][j]=='*')
+        \vspace{5pt}
+        \\ \hspace*{30pt} return True
+        \vspace{2pt}
+        \\ \hspace*{20pt}else :
+        \vspace{5pt}
+        \\ \hspace*{30pt} return True
 \newpage
-\section{Graphical Analysis} 
-\vspace{10pt}
-I have made the P.D.F(Probability Distribution Function) of $Y$ from the final P.D.F type obtained for $W_i$ .
+\section{Graphical Analysis}
 \vspace{5pt}
-\\Based on my dataset , I have gotten my P.D.F type for $W_i$ and $Y$ as \textbf{half-normal distribution function} .
+Based on observation , we have plotted the following time vs size of maze graph for BFS and DFS .
 \vspace{20pt}
+\\By far , we have observed that DFID is the slowest initially but potentially more better for bigger mazes .
 \newpage
 \section{Results}
 \vspace{20pt}
 The following conclusions have been made after evaluation of my program : 
 \begin{enumerate}
-    \item The P.D.F of $W_i$ is \textbf{half-normal distribution function} .
-    \item The value of k is $2$.
-    \item The value of $\sigma$ is $2$
+    \item The Output for the first test case :
+    \item The Output for the second test case :
+    \item The Output for the third test case :
 \end{enumerate}
 \vspace{20pt}
 \subsection*{Conclusion}
-\textbf{Thus , the distribution function is of Half-Normal type and the value of $k=2,\sigma=2$.}
+\textbf{Thus , BFS, DFS and DFID algorithms which are uninformed search methods always gives the solution to the problem , but it might not be optimal in every case .}
 \newpage
 \section{References}
 \vspace{30pt}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  25 DEC 2021 12:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  25 DEC 2021 23:43
 entering extended mode
 **c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex
 (c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex
@@ -229,34 +229,19 @@ Overfull \hbox (1.90765pt too wide) in paragraph at lines 68--69
 []\OT1/cmr/bx/n/10 DFID(graph[]input, depth,v=(0,0)) \OT1/cmr/m/n/10 : The func-tion to do DFID traver-
  []
 
-[3]
-Overfull \hbox (11.78418pt too wide) in paragraph at lines 76--100
-|  \OT1/cmr/m/n/10 tem-plist.append((i+1,j)) if(i>0): if(graph[]input[i-1][j]==' 'or graph[]input[i-
- []
-
-
-Overfull \hbox (83.17334pt too wide) in paragraph at lines 76--100
-\OT1/cmr/m/n/10 1][j]=='*') and ((i-1,j) not in open[]list): templist.append((i-1,j)) if(j<n-1): if(graph[]input[i][j+1]=='
- []
-
-
-Overfull \hbox (17.08984pt too wide) in paragraph at lines 76--100
-\OT1/cmr/m/n/10 'or graph[]input[i][j+1]=='*')and ((i,j+1) not in open[]list): tem-plist.append((i,j+1))
- []
-
-[4] [5] [6] [7] (AI_Assignment_Report.aux) ) 
+[3] [4] [5] [6] [7] (AI_Assignment_Report.aux) ) 
 Here is how much of TeX's memory you used:
  3249 strings out of 478870
  49301 string characters out of 2848837
- 350214 words of memory out of 3000000
+ 350216 words of memory out of 3000000
  21116 multiletter control sequences out of 15000+600000
  406204 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,5n,70p,359b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\tkhal\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on AI_Assignment_Report.pdf (9 pages, 140604 bytes).
+ <C:\Users\tkhal\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on AI_Assignment_Report.pdf (9 pages, 129688 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
+ 77 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
