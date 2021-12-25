@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1640456023 "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" "AI_Assignment_Report.pdf" "AI_Assignment_Report" 1640456044
-  "AI_Assignment_Report.aux" 1640456024 769 16e66b5eddc050efa3e589681b505bac "pdflatex"
-  "AI_Assignment_Report.tex" 1640456043 6444 f6f26b3bae568ad84a1a2e7d4108ec01 ""
-  "AI_Assignment_Report.toc" 1640456024 450 d1fdb83109bfcbbba5f3ea8c5f65c927 "pdflatex"
+["pdflatex"] 1640456869 "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" "AI_Assignment_Report.pdf" "AI_Assignment_Report" 1640456892
+  "AI_Assignment_Report.aux" 1640456870 769 16e66b5eddc050efa3e589681b505bac "pdflatex"
+  "AI_Assignment_Report.tex" 1640456891 6448 89081e17feaab1264f6cba8b6899d9c1 ""
+  "AI_Assignment_Report.toc" 1640456870 450 d1fdb83109bfcbbba5f3ea8c5f65c927 "pdflatex"
   "C:/Users/tkhal/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1631861058 11548 dfa6b8533d6370d4b8cbfb8d650ac930 ""
   "C:/Users/tkhal/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1628082385 9728722 0392bdbcac33aaa2af98c373f9ee5815 ""
   "C:/Users/tkhal/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1631859286 82686 2381c3433487640bf26aa76a10db7eb2 ""
@@ -57,9 +57,9 @@
   "C:/Users/tkhal/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1626117980 27390 e56d07ec4c21b9dfc83acf3baec1b83c ""
   "C:/Users/tkhal/AppData/Local/Programs/MiKTeX/tex/latex/preprint/authblk.sty" 1369148870 7196 985a983ce041cc8959cd31133cba0244 ""
   "C:/Users/tkhal/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" 1640456043 6444 f6f26b3bae568ad84a1a2e7d4108ec01 ""
+  "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" 1640456891 6448 89081e17feaab1264f6cba8b6899d9c1 ""
   (generated)
-  "AI_Assignment_Report.toc"
   "AI_Assignment_Report.aux"
+  "AI_Assignment_Report.toc"
   "AI_Assignment_Report.log"
   "AI_Assignment_Report.pdf"
