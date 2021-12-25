@@ -19,7 +19,7 @@ goaldfid= (0,0)    # target state to achieve for DFID
 statesdfs=0        # no. of states explored during dfs traversal
 statesdfid=0       # no. of states explored during dfid traversal
 DFIDstop= False    # to break out of recursion
-
+##
 def goal_state(i,j,graph_input):
     # This function determines whether the coordinate (i,j) is the end goal for the pacman or not .
     if(graph_input[i][j]=='*'):
@@ -52,7 +52,7 @@ def move_gen(i,j,graph_input):
     
 
 
-# this is the recursive Dfs utility function
+# this is the recursive DFS utility function
 def DFSUtil(v, visited,parent,graph_input,open_list):
 
 
@@ -93,7 +93,8 @@ def DFS(graph_input,v=(0,0)):
     global goaldfs,statesdfs
     # Create a set to store visited vertices
     visited = set()
-    parent= {}
+
+    parent= {} # Tuple to store the parent nodes
     
 
     # Call the recursive helper function
@@ -132,7 +133,7 @@ def DFID(graph_input, depth,v=(0,0)):
     x= goaldfs # used for traversing the parent nodes
 
 
-    
+
     while x!=(0,0):
         
         path.append(parent[x])
@@ -245,16 +246,17 @@ def searchmethod(bdd,graph_input):
         #bfs
         print("bfs")
         path,states = bfs(graph_input)
-    elif bdd==1:
+    elif bdd==1 :
         #dfs
         path,states= DFS(graph_input)
         print("dfs")
-    else:
+    elif bdd==2 :
         #dfid
         path,states= dfid(graph_input)
         print("dfid")
-
-    for i in path:
+    else:
+        print("Wrong Input .")
+    for i in path :
         graph_input[i[0]][i[1]]= '0'
     
     

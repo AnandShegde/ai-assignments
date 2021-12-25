@@ -26,212 +26,77 @@
 
 \newpage
 \pagenumbering{arabic}
-\section*{Problem Statement :}
-\textbf{(25 points)It’s still about coin toss:}You have been given the data (50000 samples) of arandom  variableZ.   You  know  that $Z=X+ 10Y$,  where X is a uniform  random  variable between -3 and 3.  You also know that 
-$$ Y = \sum_{i = 1}^{k} W_i $$
-where $ k \in {2,3,4}$ , $W_i$ are independent and identically distributed (i.i.d.)  and belong to oneof the following:
-\begin{itemize}
-    \item Exponential distribution characterized by its mean $ \frac{1}{\lambda} $
-    \item Rayleigh distribution characterized by $\sigma$ \\ (\url{https://en.wikipedia.org/wiki/Rayleigh_distribution})
-    \item Half-normal distribution characterized by $\sigma$ \\ (\url{https://en.wikipedia.org/wiki/Half-normal_distribution})
-\end{itemize}    
-Come up with a mechanism to find $k$ and the distribution of $W_i$ along with the characterizing parameter \textbf{rounded to the nearest integer} (mean if it is an exponential distribution and $\sigma$ otherwise).  Justify your mechanism analytically.
-\vspace{20pt}
 \section{Approach}
-Well , the basic approach I used is to use mathematical calculations to find a value of k for each case \{ $W_i$ is Exponential Random Variable ; $W_i$ is Rayleigh's Random Variable ; $W_i$ is Half-normal Random Variable \} .
+The basic approach we used for the A.I assignment is to use the concept of graphs \& vertices and 
+applied BFS\{Breadth First Search\} , DFS \{Depth First Search\} and DFID \{Depth First Iterative Deepening Search\}.
 \vspace{10pt}
 \\
-Further after getting the value of k for each case , I found the rounded off the value of that k to the nearest integer and checked whether $k \in \{2,3,4\} $.
+Along with applying the above algorithms for the PacMan , we have also set the preference order for adding the neighbor nodes which are:
+\\$$DOWN > UP > RIGHT > LEFT$$
 \vspace{10pt}
-\\If $k \in \{ 2,3,4\}  $ , then the {\color{cyan} test case} is {\color{green}successful} , else the {\color{cyan} test case} is {\color{red}unsuccessful}.
+\\If the input number $\in \{0,1,2\}$ , then the program executes the algorithms BFS , DFS and DFID respectively .
 \vspace{10pt}
-\\In case of when there are multiple {\color{green}successful} test cases , I will be considering the test case having the least calculation error of k 
-in my final answer for the probability distribution function type for $W_i$ .
-\vspace{10pt}
-\\After getting this test case , I can easily get it's characteristics through mathematical computation .
+\\After visiting the neighbors in the maze graph, We can easily find out the length of the path and the number of states for the maze.
 \newpage
 \section{Variables used in Python Program}
 \vspace{20pt}
 \begin{itemize}
-    \item \textbf{value} : Stores the count of the number of tails and head in the final data.
-    \item \textbf{dataset} : The raw data received from .xls data file.
-    \item \textbf{Z} : Stores raw data in numpy array
-    \item \textbf{Mean} : Stores the mean of the dataset.
-    \item \textbf{VAR} : Stores the variance of the dataset.
-    \item \textbf{a} : Variable for handling the lower bound of X .
-    \item \textbf{b} :  Variable for handling the upper bound of X .
-    \item \textbf{k} : It stores the value of k which was mentioned in the question .
-    \item \textbf{lambda} : It stores the characteristic feature for the probability distribution function in the case of Exponential distribution function.
-    \item \textbf{sigma} : It stores the characteristic feature for the probability distribution function in the case of Rayleigh distribution function or Half-normal distribution function.
-    \item \textbf{choice} : This stores the probability of the biasing of coin towards heads .
-    \item \textbf{a} : This stores the choice of user whether he wants to print the final answer or not .
-    \item \textbf{kdiff1,kdiff2,kdiff3} : These variables store the differences in calculation of k with its nearest integer value.
-    \item \textbf{val1,val2,val3} : These variables store whether the rounded off value of k is within the set $k \in \{ 2,3,4\}  $ .
-    \item \textbf{Arr} : This is the variable that stores calculation error in k if the test case is Successful .
-    \item \textbf{exp\_dist} : Distribution Function variable for Exponential distribution function case.
-    \item \textbf{ray\_dist} : Distribution Function variable for Rayleigh distribution function case.
-    \item \textbf{half\_dist} : Distribution Function variable for Half-Normal distribution function case.
+    \item \textbf{dfs\_stop} : tells when dfs to stop.
+    \item \textbf{goaldfs} : target state to achieve for DFS.
+    \item \textbf{goaldfid} : target state to achieve for DFID.
+    \item \textbf{statesdfs} : No. of states explored during DFS traversal .
+    \item \textbf{statesdfid} : No. of states explored during DFID traversal .
+    \item \textbf{DFIDstop} : to break out of recursion .
+    \item \textbf{visited} :  Variable created to store the set of visited vertices .
+    \item \textbf{parent} : Tuple to store the parent of each node . It is used for finding path .
+    \item \textbf{graph\_input} :  This stores the input given in as a list of lists .
+    \item \textbf{m} : No. of rows in the Maze .
+    \item \textbf{n} : No. of columns in the Maze .
+    \item \textbf{states} : Variable to store no. of states explored .
+    \item \textbf{pathlength} : Variable to store length of the path .
 \end{itemize}
 \newpage
 \section{Functions created in Python Program}
 \vspace{20pt}
 \begin{itemize}
-    \item \textbf{check()} : function to check whether each test case is true or false .
-    \item \textbf{roundoff()} : function to round off the parameter passed to the nearest integer value .
-    \item \textbf{roundoff1()} : function to round off the parameter passed to one digit decimal value .
-    \item \textbf{exponential()} : function to run the case of exponential distribution function .
-    \item \textbf{rayleigh()} : function to run the case of rayleigh distribution function .
-    \item \textbf{halfnormal()} : function to run the case of half normal distribution function .
-    \item \textbf{border()} :  function to print border style .
-    \item \textbf{answer()} : function that returns the minimum value inside a list .
-    \item \textbf{plot\_exp()} : function that plots the exponential distribution function .
-    \item \textbf{plot\_rayleigh()} : function that plots the rayleigh distribution function .
-    \item \textbf{plot\_halfnormal()} : function that plots the half-normal distribution function .
+    \item \textbf{goal\_state(i,j,graph\_input)} : This function determines whether the coordinate (i,j) is the end goal for the PacMan or not .
+    \item \textbf{move\_gen(i,j,graph\_input)} : This function's task is returning all possible moves available to the pacman
+    , if the adjecent block has a space(' ') or astrik('*') 
+    , funtion returns its coordinates .
+    \item \textbf{DFSUtil(v, visited,parent,graph\_input,open\_list)} : This is the recursive DFS Utility function .
+    \item \textbf{DFS(graph\_input,v=(0,0))} : The function to do DFS traversal. It uses recursive DFSUtil()- dfs utility function .
+    \item \textbf{DFID(graph\_input, depth,v=(0,0))} : The function to do DFID traversal. It uses recursive DFSUtil()- DFS Utility Function.
+    \item \textbf{DFIDUtil(v, visited,parent,graph\_input, depth)} : This is recursive DFID- utility function .
+    \item \textbf{dfid(graph\_input,v=(0,0))} :  This is the Main DFID function- which calls DFID- which is dfs version for DFID . The extra thing is the depth here.
+    \item \textbf{bfs(graph\_input,s=(0,0))} : This function is used to perform BFS .
+    \item \textbf{searchmethod(bdd,graph\_input)} : Simple function to deal with the case wise operation to perform BFS, DFS or DFID as per the requirement
 \end{itemize}
 \newpage
-\section{Logic used/Mathematical Computation}
+\section{Pseudo Code}
 The main logic for the code is to find the value of k while determining the type of distribution for $W_i$.
 \vspace{5pt}
-\\We can deduce from the question that X and Y are independent as well as each $W_i$ are independent .
-\vspace{10pt}
-\vspace{10pt}
-\\We know that :
-\begin{equation} \label{equation1}
-    Z = X + 10Y 
-\end{equation}
-\\Also ,
-\begin{equation} \label{equation2}
-    Y = \sum_{i = 1}^{k} W_i
-\end{equation}
-\\Given , that X is a uniform  random  variable between -3 and 3.
-\\So,
-$$ a = -3 , b = 3$$
-$$ E(X) = \frac{(b+a)}{2} = 0$$
-$$ Var(X) = \frac{(b-a)^2}{12} = 3$$
-\\Now we take Mean and Variance respectively on both sides in eqn \ref{equation1} and eqn \ref{equation2}.
+\\
+def move\_gen(i,j,graph\_input):
 \vspace{5pt}
-\\So , we get :- 
-\begin{equation}
-    E(Z) = E(X) + 10E(Y)
-\Rightarrow E(Y) = \frac{E(Z) - E(X)}{10}
-\end{equation}
-\vspace{5pt}
-\begin{equation}
-    Var(Z) = Var(X) + 100Var(Y)
-\Rightarrow Var(Y) = \frac{Var(Z) - Var(X)}{100}
-\end{equation}
-\newpage
-Now , we just go through each case for the distribution function type for $W_i$:
-    \subsection{Exponential Distribution Function :}
-    \vspace{5pt}
-    \setcounter{equation}{0}
-    \begin{equation}
-        E(W_i) = \frac{1}{\lambda} 
-    \end{equation}
-    \begin{equation}
-        Var(W_i) = \frac{1}{\lambda^2}
-    \end{equation}
-    \\So ,
-    \begin{equation}
-        E(Y) = \sum_{i = 1}^{k} E(W_i)
-        \Rightarrow E(Y) = \frac{k}{\lambda}
-    \end{equation}
-    \begin{equation}
-        Var(Y) = \sum_{i = 1}^{k} Var(W_i)
-        \Rightarrow Var(Y) = \frac{k}{\lambda^2}
-    \end{equation}
-    \vspace{5pt}
-    \\So , equating the eqns we get : 
-    \begin{equation}
-        E(Y) = \frac{k}{\lambda}  = \frac{E(Z) - E(X)}{10}
-    \end{equation}
-    \begin{equation}
-        Var(Y) = \frac{k}{\lambda^2} = \frac{Var(Z) - Var(X)}{100}
-    \end{equation}
-    \vspace{5pt}
-    \\Now , equating eqn 5 and eqn 6 we get the value of k as : 
-    \begin{equation}
-        k = \frac{(E(Z) - E(X))^2}{Var(Z) - Var(X)}
-    \end{equation}
-    \vspace{5pt}
-    \\ and $\lambda$ is :
-    \begin{equation}
-        \lambda = \frac{10k}{E(Z) - E(X)}
-    \end{equation}
-
-    \subsection{Rayleigh Distribution Function :}
-    \vspace{5pt}
-    \setcounter{equation}{0}
-    \begin{equation}
-        E(W_i) = \sigma \sqrt{\frac{\pi}{2}} 
-    \end{equation}
-    \begin{equation}
-        Var(W_i) = \left(\frac{4-\pi}{2}\right)\sigma^2 
-    \end{equation}
-    \\So ,
-    \begin{equation}
-        E(Y) = \sum_{i = 1}^{k} E(W_i)
-        \Rightarrow E(Y) = k\sigma\sqrt{\frac{\pi}{2}} 
-    \end{equation}
-    \begin{equation}
-        Var(Y) = \sum_{i = 1}^{k} Var(W_i)
-        \Rightarrow Var(Y) = k\sigma^2\left(\frac{4-\pi}{2}\right)
-    \end{equation}
-    \vspace{5pt}
-    \\So , equating the eqns we get : 
-    \begin{equation}
-        E(Y) = k\sigma\sqrt{\frac{\pi}{2}} = \frac{E(Z) - E(X)}{10}
-    \end{equation}
-    \begin{equation}
-        Var(Y) = k\sigma^2\left(\frac{4-\pi}{2}\right) = \frac{Var(Z) - Var(X)}{100}
-    \end{equation}
-    \vspace{5pt}
-    \\Now , equating eqn 5 and eqn 6 we get the value of k as : 
-    \begin{equation}
-        k = \left(\frac{(E(Z) - E(X))^2}{Var(Z) - Var(X)}\right)\left(\frac{4-\pi}{\pi}\right)
-    \end{equation}
-    \vspace{5pt}
-    \\ and $\sigma$ is :
-    \begin{equation}
-        \sigma = \left(\frac{E(Z) - E(X)}{10k}\right)\left(\sqrt{\frac{2}{\pi}}\right)
-    \end{equation}
-
-    \subsection{Half-normal Distribution Function :}
-    \vspace{5pt}
-    \setcounter{equation}{0}
-    \begin{equation}
-        E(W_i) = \sigma \sqrt{\frac{2}{\pi}} 
-    \end{equation}
-    \begin{equation}
-        Var(W_i) = \left(\frac{\pi-2}{\pi}\right)\sigma^2 
-    \end{equation}
-    \\So ,
-    \begin{equation}
-        E(Y) = \sum_{i = 1}^{k} E(W_i)
-        \Rightarrow E(Y) = k\sigma \sqrt{\frac{2}{\pi}} 
-    \end{equation}
-    \begin{equation}
-        Var(Y) = \sum_{i = 1}^{k} Var(W_i)
-        \Rightarrow Var(Y) = \left(\frac{\pi-2}{\pi}\right)k\sigma^2
-    \end{equation}
-    \vspace{5pt}
-    \\So , equating the eqns we get : 
-    \begin{equation}
-        E(Y) = k\sigma\sqrt{\frac{\pi}{2}} = \frac{E(Z) - E(X)}{10}
-    \end{equation}
-    \begin{equation}
-        Var(Y) = \left(\frac{\pi-2}{\pi}\right)k\sigma^2 = \frac{Var(Z) - Var(X)}{100}
-    \end{equation}
-    \vspace{5pt}
-    \\Now , equating eqn 5 and eqn 6 we get the value of k as : 
-    \begin{equation}
-        k = \left(\frac{(E(Z) - E(X))^2}{Var(Z) - Var(X)}\right)\left(\frac{\pi-2}{\pi}\right)\left(\frac{\pi}{2}\right)
-    \end{equation}
-    \vspace{5pt}
-    \\ and $\sigma$ is :
-    \begin{equation}
-        \sigma = \left(\frac{E(Z) - E(X)}{10k}\right)\left(\sqrt{\frac{\pi}{2}}\right)
-    \end{equation}
+    \\ \hspace*{10pt}global open\_list
+    \vspace{2pt}
+    \\ \hspace*{10pt}templist=[]
+    \vspace{2pt}
+    \\ \hspace*{10pt}if(i$<$n-1):
+    \vspace{2pt}
+    \\ \hspace*{20pt}    if((graph\_input[i+1][j]==' ' or graph\_input[i+1][j]=='*') and ((i+1,j) not in open\_list)):
+    \vspace{2pt}
+    \\ \hspace*{30pt}        templist.append((i+1,j))
+    if(i>0):
+        if(graph\_input[i-1][j]==' 'or graph\_input[i-1][j]=='*') and ((i-1,j) not in open\_list):
+            templist.append((i-1,j))
+    if(j<n-1):
+        if(graph\_input[i][j+1]==' 'or graph\_input[i][j+1]=='*')and ((i,j+1) not in open\_list):
+            templist.append((i,j+1))
+    if(j>0):
+        if(graph\_input[i][j-1]==' 'or graph\_input[i][j-1]=='*') and ((i+1,j) not in open\_list):
+            templist.append((i,j-1))
+    return templist
 \section*{Logic :}
 Now , we have gone through each case of probable probability distribution functions for $W_i$ ,
 \vspace{5pt}
@@ -244,9 +109,7 @@ and is considered for the final answer .
 \newpage
 \section{Graphical Analysis} 
 \vspace{10pt}
-\includegraphics[scale = 0.29]{Figure 1.jpg}
-\vspace{5pt}
-\\I have made the P.D.F(Probability Distribution Function) of $Y$ from the final P.D.F type obtained for $W_i$ .
+I have made the P.D.F(Probability Distribution Function) of $Y$ from the final P.D.F type obtained for $W_i$ .
 \vspace{5pt}
 \\Based on my dataset , I have gotten my P.D.F type for $W_i$ and $Y$ as \textbf{half-normal distribution function} .
 \vspace{20pt}
@@ -266,9 +129,8 @@ The following conclusions have been made after evaluation of my program :
 \section{References}
 \vspace{30pt}
 \begin{itemize}
-    \item \url{https://docs.scipy.org}
     \item \url{http://geeksforgeeks.com}
     \item \url{https://wikipedia.org}
-    \item \url{https://matplotlib.org/}
+    \item \url{https://stackoverflow.com}
 \end{itemize}
 \end{document}
