@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  25 DEC 2021 23:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  26 DEC 2021 10:29
 entering extended mode
 **c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex
 (c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex
@@ -229,19 +229,63 @@ Overfull \hbox (1.90765pt too wide) in paragraph at lines 68--69
 []\OT1/cmr/bx/n/10 DFID(graph[]input, depth,v=(0,0)) \OT1/cmr/m/n/10 : The func-tion to do DFID traver-
  []
 
-[3] [4] [5] [6] [7] (AI_Assignment_Report.aux) ) 
+[3] [4]
+<time.jpg, id=28, 1156.32pt x 650.43pt>
+File: time.jpg Graphic file (type jpg)
+<use time.jpg>
+Package pdftex.def Info: time.jpg  used on input line 126.
+(pdftex.def)             Requested size: 346.89868pt x 195.1305pt.
+
+Overfull \hbox (1.89868pt too wide) in paragraph at lines 124--128
+[] 
+ []
+
+[5 <./time.jpg>]
+<Output1.jpg, id=33, 242.1045pt x 171.64125pt>
+File: Output1.jpg Graphic file (type jpg)
+<use Output1.jpg>
+Package pdftex.def Info: Output1.jpg  used on input line 134.
+(pdftex.def)             Requested size: 242.10391pt x 171.64081pt.
+<Output2.jpg, id=34, 226.446pt x 172.2435pt>
+File: Output2.jpg Graphic file (type jpg)
+<use Output2.jpg>
+Package pdftex.def Info: Output2.jpg  used on input line 136.
+(pdftex.def)             Requested size: 226.44543pt x 172.24307pt.
+ [6 <./Output1.jpg> <./Output2.jpg>]
+<Output3.jpg, id=38, 227.04825pt x 174.6525pt>
+File: Output3.jpg Graphic file (type jpg)
+<use Output3.jpg>
+Package pdftex.def Info: Output3.jpg  used on input line 139.
+(pdftex.def)             Requested size: 227.04768pt x 174.65207pt.
+<Output4.jpg, id=39, 213.79875pt x 205.9695pt>
+File: Output4.jpg Graphic file (type jpg)
+<use Output4.jpg>
+Package pdftex.def Info: Output4.jpg  used on input line 141.
+(pdftex.def)             Requested size: 213.79822pt x 205.96898pt.
+ [7 <./Output3.jpg> <./Output4.jpg>]
+<Output5.jpg, id=43, 219.82124pt x 208.3785pt>
+File: Output5.jpg Graphic file (type jpg)
+<use Output5.jpg>
+Package pdftex.def Info: Output5.jpg  used on input line 144.
+(pdftex.def)             Requested size: 219.8207pt x 208.37798pt.
+<Output6.jpg, id=44, 211.992pt x 206.57175pt>
+File: Output6.jpg Graphic file (type jpg)
+<use Output6.jpg>
+Package pdftex.def Info: Output6.jpg  used on input line 146.
+(pdftex.def)             Requested size: 211.99147pt x 206.57123pt.
+ [8 <./Output5.jpg> <./Output6.jpg>] [9] (AI_Assignment_Report.aux) ) 
 Here is how much of TeX's memory you used:
- 3249 strings out of 478870
- 49301 string characters out of 2848837
- 350216 words of memory out of 3000000
- 21116 multiletter control sequences out of 15000+600000
+ 3298 strings out of 478870
+ 50036 string characters out of 2848837
+ 350262 words of memory out of 3000000
+ 21158 multiletter control sequences out of 15000+600000
  406204 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,5n,70p,359b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,5n,70p,359b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\tkhal\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on AI_Assignment_Report.pdf (9 pages, 129667 bytes).
+Output written on AI_Assignment_Report.pdf (11 pages, 330177 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
