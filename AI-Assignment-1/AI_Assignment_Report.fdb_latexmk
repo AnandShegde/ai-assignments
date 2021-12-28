@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1640526897 "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" "AI_Assignment_Report.pdf" "AI_Assignment_Report" 1640526910
-  "AI_Assignment_Report.aux" 1640526897 770 c0fe2d03f2a3dd7a2dcdf7ee895d9905 "pdflatex"
+["pdflatex"] 1640527495 "c:/Users/tkhal/Documents/GitHub/ai-assignments/AI_Assignment_Report.tex" "AI_Assignment_Report.pdf" "AI_Assignment_Report" 1640527497
+  "AI_Assignment_Report.aux" 1640527496 770 c0fe2d03f2a3dd7a2dcdf7ee895d9905 "pdflatex"
   "AI_Assignment_Report.tex" 1640526910 7164 f134c1b2bfd800ac876395fe3c935b10 ""
-  "AI_Assignment_Report.toc" 1640526897 450 afd6ea83d87cc8566e99eda1c9030a5c "pdflatex"
+  "AI_Assignment_Report.toc" 1640527496 450 afd6ea83d87cc8566e99eda1c9030a5c "pdflatex"
   "C:/Users/tkhal/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1631861058 11548 dfa6b8533d6370d4b8cbfb8d650ac930 ""
   "C:/Users/tkhal/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1628082385 9728722 0392bdbcac33aaa2af98c373f9ee5815 ""
   "C:/Users/tkhal/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1631859286 82686 2381c3433487640bf26aa76a10db7eb2 ""
@@ -67,7 +67,7 @@
   "table.jpg" 1640526566 66772 d1c6829500658e69f354dc997d998858 ""
   "time.jpg" 1640493517 45801 0959c17117b1364233bbd00138288763 ""
   (generated)
+  "AI_Assignment_Report.toc"
+  "AI_Assignment_Report.log"
   "AI_Assignment_Report.pdf"
   "AI_Assignment_Report.aux"
-  "AI_Assignment_Report.log"
-  "AI_Assignment_Report.toc"
