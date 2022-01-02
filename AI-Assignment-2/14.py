@@ -11,26 +11,34 @@ open= []
 heap= []
 closed= []
 parent= {}
-borh= s[0]
-heu= s[2]
+BorH= s[0] # bfs or hill climbing
+heu= s[2] # which heuristic to use
 
-f.readline()
-start=[]
+f.readline() 
+
+# reading start and goal node
+start=[] # start node
 for _ in range(3):
     s= f.readline()
     lis = (s).split()
     start.append(lis)
 
-f.readline()
-goal= []
 
+f.readline()
+
+
+goal= []
 for _ in range(3):
     s= f.readline()
     lis = s.split()
     goal.append(lis)
 
+
+# storing the goal node as a dictionary. This will be used for 3rd heuristic
+# which is "Euclidian distance."
 d_goal = dict((j,(x, y)) for x, i in enumerate(goal) for y, j in enumerate(i))
 
+# utility function for converting a list to string.
 def stringify(state):
     st=''
     for j in state:
@@ -40,7 +48,7 @@ def stringify(state):
     return st
     
 
-
+# generate the neigbours of a node.
 def movegen(curr_state):
     global closed, open,parent
     state = copy.deepcopy(curr_state)
@@ -52,38 +60,25 @@ def movegen(curr_state):
             for j in range(len(temp)):
                 temp1 = copy.deepcopy(temp)
                 if j != i:
-                    temp1[j] = temp1[j] + [elem]
-                    # if (temp1 not in closed and temp1 not in open):
-                    
+                    temp1[j] = temp1[j] + [elem]                    
                     if(parent.get(stringify(temp1))== None):
-                        # curr_heu=heuristic1(temp1)
-                        # open_list.append(copy.deepcopy(temp1))
                         neighbors.append(temp1)
-                        # list = [temp1, curr_heu]
-                        # heap.append(copy.deepcopy(list))
     return neighbors
 
 
 
 def goal_state(cur,i):
     global goal  
-    if(heuristic(cur,i)==heuristic(goal,i)):
+# since the heuristic of the goal state is the best possible and unique, just check for that.
+    if(heuristic(cur,i)==heuristic(goal,i)): 
         return 1
     return 0
 
 
-
-
-
-
-def heuristic(state,i):
+def heuristic(state,i): ## calculating the heuristics
     global goal
-    hValue = 0
-    
-    
-    
-    if(i=='0'): 
-        
+    hValue = 0    
+    if(i=='0'): # if the block is in correct position add 1, else -1
         for i in range(3):
             for j in range(len(state[i])):
                 if j >= len(goal[i]):
@@ -93,14 +88,10 @@ def heuristic(state,i):
                     hValue = hValue + 1
                 else:
                     hValue = hValue - 1
+
+ # if block is in correct position and all the blocks below it are 
+ # in correct position, then add the height of the block else substract the height
     if (i=='1'):
-        # d_cur = dict((j,(x, y)) for x, i in enumerate(state) for y, j in enumerate(i))
-        # for i in range(3):
-        #     for j in range(len(state[i])):
-        #         curx, cury = d_cur[state[i][j]]
-        #         goalx, goaly = d_goal[state[i][j]]
-        #         hValue += (abs(curx-goalx) + abs(cury-goaly))
-        
         for i in range(3):
             right= 1
             for j in range(len(state[i])):
@@ -115,7 +106,7 @@ def heuristic(state,i):
                 else:
                     hValue -= j
 
-        
+# Euclidian Norm
     if (i=='2'):
         d_cur = dict((j,(x, y)) for x, i in enumerate(state) for y, j in enumerate(i))
         for i in range(3):
@@ -123,11 +114,6 @@ def heuristic(state,i):
                 curx, cury = d_cur[state[i][j]]
                 goalx, goaly = d_goal[state[i][j]]
                 hValue += (((curx-goalx)**2 + (cury-goaly)**2)**(1/2))
-         
-
-
-
-
     return hValue
         
 
@@ -138,11 +124,10 @@ def bfs(i):
     print("bfs")
     cur= copy.deepcopy(start)
     open.append(cur)
-    count=0
+    count = 0
     while(True):
         closed.append(cur)
-        count+=1
-        # print(count)
+        count+=1 # no of states explored.
         open.remove(cur)
         
         if(goal_state(cur,i)):
@@ -156,17 +141,17 @@ def bfs(i):
         for neighour in neighbours:
             heap.append([neighour,heuristic(neighour,i)])
             open.append(neighour)
-            st=''
-            cu=''
-            for j in neighour:
-                for k in j:
-                    st= st+k
-                st= st+' '
+            st= stringify(neighour)
+            cu= stringify(cur)
+            # for j in neighour:
+            #     for k in j:
+            #         st= st+k
+            #     st= st+' '
             
-            for j in cur:
-                for k in j:
-                    cu=cu+k
-                cu= cu+' '
+            # for j in cur:
+            #     for k in j:
+            #         cu=cu+k
+            #     cu= cu+' '
             
             parent[st]=cu
         
@@ -251,10 +236,10 @@ for j in start:
         starts=starts+k
     starts= starts+' '
 
-print(borh)
+print(BorH)
 
 
-if(borh=='0'):
+if(BorH=='0'):
     print("sjoe")
     cur,count= bfs(heu)
     print(f"no of states explored= { count }")
@@ -272,7 +257,7 @@ if(borh=='0'):
     
     print(starts)
     print("the sequence of moves to reach goal state(read from the end):")
-elif(borh=='1'):
+elif(BorH=='1'):
     cur,count= hillclimbing(heu)
     print(f"no of states explored= { count }")
     cu=''
