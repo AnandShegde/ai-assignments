@@ -123,47 +123,43 @@ def bfs(i):
     global parent
     print("bfs")
     cur= copy.deepcopy(start)
-    open.append(cur)
+    open.append(cur) # add start node to the open
     count = 0
     while(True):
         closed.append(cur)
         count+=1 # no of states explored.
         open.remove(cur)
         
+        # if goal state is reached return cur and count
         if(goal_state(cur,i)):
             print(goal_state(cur,i))
             print("you have reached the goal.")
             return cur ,count
         
         
-        cur_heu= heuristic(cur,i)
+        cur_heu= heuristic(cur,i) # find heuristic of current node
         neighbours= movegen(cur)
         for neighour in neighbours:
             heap.append([neighour,heuristic(neighour,i)])
             open.append(neighour)
             st= stringify(neighour)
             cu= stringify(cur)
-            # for j in neighour:
-            #     for k in j:
-            #         st= st+k
-            #     st= st+' '
-            
-            # for j in cur:
-            #     for k in j:
-            #         cu=cu+k
-            #     cu= cu+' '
             
             parent[st]=cu
         
+        # remove the current node from the heap.
         cur_list= [cur, cur_heu]
         if cur_list in heap:
             heap.remove(cur_list)
         
+        # if open list becomes empty there is no way you can reach the state
         if(len(open)==0):
             print("You cannot reach the goal state")
-        if(i=='0' or i=='1'):
+        
+
+        if(i=='0' or i=='1'): # for first two heuristics, we have to maximise it, so we extract max from heap
             current_heap = copy.deepcopy(max(heap,key=itemgetter(1))) 
-        else:
+        else: # for last one, it is minimizing problem. so extract minimum.
             current_heap= copy.deepcopy(min(heap,key=itemgetter(1)))     
         cur = current_heap[0]
 
@@ -190,21 +186,11 @@ def hillclimbing(i):
         neighbours= movegen(cur)
         heap= []
         for neighour in neighbours:
-            
-            heap.append([neighour,heuristic(neighour,i)])
             open.append(neighour)
-            st=''
-            cu=''
-            for j in neighour:
-                for k in j:
-                    st= st+k
-                st= st+' '
+            heap.append([neighour,heuristic(neighour,i)])
             
-            for j in cur:
-                for k in j:
-                    cu=cu+k
-                cu= cu+' '
-            
+            st= stringify(neighour)
+            cu= stringify(cur)
             parent[st]=cu
         
         cur_list= [cur, cur_heu]
@@ -221,9 +207,9 @@ def hillclimbing(i):
         else:
             current_heap= copy.deepcopy(min(heap,key=itemgetter(1)))  
 
-        if(heuristic(cur,i)==heuristic(current_heap[0],i)):
-            print("You cannot reach the goal state")
-            print(count)
+        if(heuristic(cur,i)==heuristic(current_heap[0],i)): # if there is a better node than current, its heuristic will be greater than the current then we go there.  # else just 
+            print("You did not reach the goal state")
+            print(f"no of states explored= {count}")
             exit()
 
 
@@ -242,37 +228,24 @@ print(BorH)
 if(BorH=='0'):
     print("sjoe")
     cur,count= bfs(heu)
-    print(f"no of states explored= { count }")
-    cu=''
-    for j in cur:
-        for k in j:
-            cu=cu+k
-        cu= cu+' '
-    
-    print(cur)
-    print("the sequence of moves to reach goal state(read from the end):")
-    while(starts!= cu):
-        print(f"{cu}")
-        cu= parent[cu]
-    
-    print(starts)
-    print("the sequence of moves to reach goal state(read from the end):")
 elif(BorH=='1'):
     cur,count= hillclimbing(heu)
-    print(f"no of states explored= { count }")
-    cu=''
-    for j in cur:
-        for k in j:
-            cu=cu+k
-        cu= cu+' '
-    
-    print(cur)
-    print("the sequence of moves to reach goal state(read from the end):")
-    while(starts!= cu):
-        print(f"{cu}")
-        cu= parent[cu]
-    
-    print(starts)
-    print("the sequence of moves to reach goal state(read from the end):")
+print(f"no of states explored= { count }")
+cu=''
+for j in cur:
+    for k in j:
+        cu=cu+k
+    cu= cu+' '
+
+print(cur)
+print("the sequence of moves to reach goal state(read from the end):")
+while(starts!= cu):
+    print(f"{cu}")
+    cu= parent[cu]
+
+print(starts)
+print("the sequence of moves to reach goal state(read from the end):")
+
+
 
 print(f"time taken= {time.time()-starttime}")
