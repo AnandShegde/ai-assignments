@@ -26,109 +26,143 @@
 \newpage
 \pagenumbering{arabic}
 \section{Approach}
-The basic approach we used for the A.I assignment is to use the concept of Heuristic Search Algorithms and 
-apply BFS \{Best First Search\} and Hill-climbing.
+The basic approach we used for the A.I assignment is to use the concept \\of Heuristic Search Algorithms and 
+apply BFS \{Best First Search\} and \\Hill-climbing techniques.
 \vspace{10pt}
 \subsection*{State Space}
-\subsection*{Start \& Goal Node}
-\begin{itemize}
-    \item \textbf{Start Node} 
-\end{itemize}
-\newpage
-\section{Variables used in Python Program}
-\vspace{20pt}
-\begin{itemize}
-    \item \textbf{dfs\_stop} : tells when dfs to stop.
-    \item \textbf{goaldfs} : target state to achieve for DFS.
-    \item \textbf{goaldfid} : target state to achieve for DFID.
-    \item \textbf{statesdfs} : No. of states explored during DFS traversal .
-    \item \textbf{statesdfid} : No. of states explored during DFID traversal .
-    \item \textbf{DFIDstop} : to break out of recursion .
-    \item \textbf{visited} :  Variable created to store the set of visited vertices .
-    \item \textbf{parent} : Tuple to store the parent of each node . It is used for finding path .
-    \item \textbf{graph\_input} :  This stores the input given in as a list of lists .
-    \item \textbf{m} : No. of rows in the Maze .
-    \item \textbf{n} : No. of columns in the Maze .
-    \item \textbf{states} : Variable to store no. of states explored .
-    \item \textbf{pathlength} : Variable to store length of the path .
-\end{itemize}
-\newpage
-\section{Functions created in Python Program}
-\vspace{20pt}
-\begin{itemize}
-    \item \textbf{goal\_state(i,j,graph\_input)} : This function determines whether the coordinate (i,j) is the end goal for the PacMan or not .
-    \item \textbf{move\_gen(i,j,graph\_input)} : This function's task is returning all \\possible moves available to the PacMan
-    , if the adjecent block has a space\\(' ') or astrik('*') 
-    , funtion returns its coordinates .
-    \item \textbf{DFSUtil(v, visited,parent,graph\_input,open\_list)} : This is the recursive DFS Utility function .
-    \item \textbf{DFS(graph\_input,v=(0,0))} : The function to do DFS traversal. It uses recursive DFSUtil()- dfs utility function .
-    \item \textbf{DFID(graph\_input, depth,v=(0,0))} : The function to do DFID traversal. It uses recursive DFSUtil()- DFS Utility Function.
-    \item \textbf{DFIDUtil(v, visited,parent,graph\_input, depth)} : This is recursive DFID- utility function .
-    \item \textbf{dfid(graph\_input,v=(0,0))} :  This is the Main DFID function- which calls DFID- which is dfs version for DFID . The extra thing is the depth here.
-    \item \textbf{bfs(graph\_input,s=(0,0))} : This function is used to perform BFS .
-    \item \textbf{searchmethod(bdd,graph\_input)} : Simple function to deal with the case wise operation to perform BFS, DFS or DFID as per the requirement
-\end{itemize}
+A state space is the set of all configurations that a given problem and its \\environment could achieve .
+\vspace{10pt}
+\\We have been given with the fact that each node has exactly not more than 6 neighbors .
+The Set Space Set (S) consists of all possible configuration of the
+boxes in the set of 3 stacks .
+\subsection*{Start \& Goal node}
+We have taken the start node , the goal node and the algorithm mode as inputs which are provided in input.txt file 
+and the corresponding output is displayed in CLI .
+\vspace{10pt}
+\\The heuristic value for each visited node is calculated with reference to the goal node using the heuristic function .
+\vspace{10pt}
+\\One such example is the following :
+\\Start Node :
+\\\hspace*{10pt}E B F
+\\\hspace*{10pt}D A 
+\\\hspace*{10pt}C
+\\Goal Node :
+\\\hspace*{10pt}A D B
+\\\hspace*{10pt}E F C
 \newpage
 \section{Pseudo Code}
 The main pseudo code used in our assignment is as follows :
 \subsection*{move\_gen function}
 \vspace{5pt}
-def move\_gen(i,j,graph\_input):
+def move\_gen(curr\_state):
 \vspace{5pt}
-    \\ \hspace*{20pt}global open\_list
+    \\ \hspace*{20pt}global closed, open,parent
     \vspace{2pt}
-    \\ \hspace*{20pt}templist=[]
+    \\ \hspace*{20pt}state = copy.deepcopy(curr\_state)
     \vspace{2pt}
-    \\ \hspace*{20pt}if(i$<$n-1):
+    \\ \hspace*{20pt}neighbors = [ ]
     \vspace{2pt}
-    \\ \hspace*{30pt}    if((graph\_input[i+1][j]==' ' or '*') and ((i+1 , j) not in open\_list)):
+    \\ \hspace*{20pt}for i in range(len(state)):
     \vspace{2pt}
-    \\ \hspace*{40pt}        templist.append((i+1 , j))
+    \\ \hspace*{30pt}temp = copy.deepcopy(state)
     \vspace{2pt}
-    \\ \hspace*{20pt} if(i$>$0):
+    \\ \hspace*{30pt}if length of temp[i] is greater than 0:
     \vspace{2pt}
-    \\ \hspace*{30pt}    if(graph\_input[i-1][j]==' ' or '*') and ((i-1 , j) not in open\_list):
+    \\ \hspace*{40pt}elem = temp[i].pop()
     \vspace{2pt}
-    \\ \hspace*{30pt}        templist.append((i-1,j))
+    \\ \hspace*{40pt}for j in range(len(temp)):
     \vspace{2pt}
-    \\ \hspace*{20pt} if(j$<$n-1):
+    \\ \hspace*{50pt}temp1 = copy.deepcopy(temp)
     \vspace{2pt}
-    \\ \hspace*{30pt}    if(graph\_input[i][j+1]==' ' or '*') and ((i , j+1) not in open\_list):
+    \\ \hspace*{50pt}if j not equal to i:
     \vspace{2pt}
-    \\ \hspace*{40pt}        templist.append((i,j+1))
+    \\ \hspace*{60pt}temp1[j] = temp1[j] + [elem]
     \vspace{2pt}
-    \\ \hspace*{20pt} if(j$>$0):
+    \\ \hspace*{60pt}if(parent.get(stringify(temp1)) is empty):
     \vspace{2pt}
-    \\ \hspace*{30pt}    if(graph\_input[i][j-1]==' ' or '*') and ((i+1 , j) not in open\_list):
+    \\ \hspace*{70pt}neighbors.append(temp1)
     \vspace{2pt}
-    \\ \hspace*{40pt}        templist.append((i,j-1))
-    \vspace{2pt}
-    \\ \hspace*{20pt}return templist
+    \\ \hspace*{20pt}return neighbors
+
 \subsection*{goal\_state function}
     \vspace{5pt}
-    def goal\_state(i,j,graph\_input):
-    \vspace{5pt}
-        \\ \hspace*{20pt}if(graph\_input[i][j]=='*')
+    def goal\_state(cur,i):
         \vspace{5pt}
-        \\ \hspace*{30pt} return True
-        \vspace{2pt}
-        \\ \hspace*{20pt}else :
+        \\ \hspace*{20pt}global goal
         \vspace{5pt}
-        \\ \hspace*{30pt} return True
+        \\ \hspace*{20pt}if(heuristic(cur,i) is equal to heuristic(goal,i)):
+        \vspace{5pt}
+        \\ \hspace*{30pt} return 1
+        \vspace{5pt}
+        \\ \hspace*{20pt} return 0
 \newpage
-\section{Graphical Analysis}
+\section{Heuristic functions}
+\subsection{Heuristic 1}
+\begin{itemize}
+    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item This heuristic function assigns the value :
+    \begin{enumerate}
+        \item+1 to the blocks of the current stack which
+        are present in their correct position with respect to the goal state's blocks .
+        \item$-1$ to the blocks which are not present in their right position
+        with respect to the goal state .
+    \end{enumerate}
+    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+\subsection{Heuristic 2}
+\begin{itemize}
+    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item This heuristic function assigns the value :
+    \begin{enumerate}
+        \item+h to those blocks of the current stack which
+        have the same height as of that to the goal state's blocks , where h is the height of the block.
+        \item$-h$ to the blocks which do not have the same height with respect to the
+        goal state's blocks , where h is the height of the block .
+    \end{enumerate}
+    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+
+\subsection{Heuristic 3}
+\begin{itemize}
+    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item The sum of the Manhattan distances of each of the blocks in a state gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+\newpage
+\section{Analysis \& Observations}
 \vspace{5pt}
-Based on observation , we have plotted the following .
+Based on observation , we have plotted the following graphs for Best First Search Algorithm :
+\\\includegraphics[scale=0.9]{Graph.jpg}
+\includegraphics{Graph1.jpg}
+\vspace{5pt}
+\\From the above graphs , we have analysed that the best first search algorithm always finds the best and optimal solution
+but at the cost of time consumed is high as BFS has a time complexity of O($b^d$) .
 \newpage
 \section{Results}
 \vspace{20pt}
-The following conclusions have been made after evaluation of my program : 
-\begin{enumerate}
-    \item :)
-\end{enumerate}
+The following conclusions have been made after evaluation of our program :
+\begin{description}
+    \item[States Explored :]The Hill-Climbing algorithm in general will have lesser no. of states explored than that of BFS .
+    In the worst scenario, the best first search algorithm will explore all the states but Hill-Climbing algorithm will explore uptill $O(bd)$ 
+    ,\\ where b = the maximum beam width 
+    \\\hspace*{29pt}d = the depth of the search graph from the start state.
+    \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
+    \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
+    but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
+\end{description}
 \vspace{20pt}
 \subsection*{Conclusion}
-Dont know .
+The Best First Search Algorithm is the more optimal choice as it helps to solve the given problem
+efficiently . 
+\vspace{5pt}
+\\Although it takes more time than the Hill-Climbing algorithm, it ensures that the best solution
+has been found to reach the goal state by exploring all the nodes/states in $O(b^d)$ , whereas in Hill-Climbing algorithm
+not all the nodes/states are visited as sometimes the algorithm gets stuck at a local extremum while finding the optimal path to the goal state.
 \newpage
 \section{References}
 \vspace{30pt}
