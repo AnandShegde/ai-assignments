@@ -34,7 +34,7 @@ A state space is the set of all configurations that a given problem and its \\en
 \vspace{10pt}
 \\We have been given with the fact that each node has exactly not more than 6 neighbors .
 The Set Space Set (S) consists of all possible configuration of the
-boxes in the set of 3 stacks .
+blocks in the set of 3 stacks .
 \subsection*{Start \& Goal node}
 We have taken the start node , the goal node and the algorithm mode as inputs which are provided in input.txt file 
 and the corresponding output is displayed in CLI .
@@ -128,9 +128,9 @@ def move\_gen(curr\_state):
 
 \subsection{Heuristic 3}
 \begin{itemize}
-    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item This function turns the Block problem into a minimization problem for the Best First Search Algorithm .
     \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
-    \item The sum of the Manhattan distances of each of the blocks in a state gives us the heuristic value for that state .
+    \item The sum of the Euclidean distances of each of the blocks in a state gives us the heuristic value for that state .
     \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
 \end{itemize}
 \newpage
@@ -154,6 +154,7 @@ The following conclusions have been made after evaluation of our program :
     \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
     \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
     but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
+    \item[Completeness :] The Best First Search Algorithm is Complete as it explores all the states sooner or later. But the Hill Climbing Algorithm is not complete. As it almost always gets stuck in local minima if we do not come up with a really good heuristic.
 \end{description}
 \vspace{20pt}
 \subsection*{Conclusion}

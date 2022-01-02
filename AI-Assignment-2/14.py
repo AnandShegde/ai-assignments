@@ -26,19 +26,6 @@ for _ in range(3):
 
 f.readline()
 
-
-goal= []
-for _ in range(3):
-    s= f.readline()
-    lis = s.split()
-    goal.append(lis)
-
-
-# storing the goal node as a dictionary. This will be used for 3rd heuristic
-# which is "Euclidian distance."
-d_goal = dict((j,(x, y)) for x, i in enumerate(goal) for y, j in enumerate(i))
-
-# utility function for converting a list to string.
 def stringify(state):
     st=''
     for j in state:
@@ -46,6 +33,19 @@ def stringify(state):
             st= st+k
         st= st+' '
     return st
+goal= []
+for _ in range(3):
+    s= f.readline()
+    lis = s.split()
+    goal.append(lis)
+
+print(f"given initial state={stringify(start)}\ngiven end state to be reached= {stringify(goal)} ")
+# storing the goal node as a dictionary. This will be used for 3rd heuristic
+# which is "Euclidian distance."
+d_goal = dict((j,(x, y)) for x, i in enumerate(goal) for y, j in enumerate(i))
+
+# utility function for converting a list to string.
+
     
 
 # generate the neigbours of a node.
@@ -132,7 +132,7 @@ def bfs(i):
         
         # if goal state is reached return cur and count
         if(goal_state(cur,i)):
-            print(goal_state(cur,i))
+            
             print("you have reached the goal.")
             return cur ,count
         
@@ -177,7 +177,7 @@ def hillclimbing(i):
         open.remove(cur)
         
         if(goal_state(cur,i)):
-            print(goal_state(cur,i))
+            
             print("you have reached the goal.")
             return cur ,count
         
@@ -199,7 +199,7 @@ def hillclimbing(i):
         
         if(len(open)==0):
             print("You cannot reach the goal state")
-            print(count)
+            print(f"no of states explored= {count}")
             exit()
         
         if(i=='0' or i=='1'):
@@ -222,11 +222,11 @@ for j in start:
         starts=starts+k
     starts= starts+' '
 
-print(BorH)
+
 
 
 if(BorH=='0'):
-    print("sjoe")
+    
     cur,count= bfs(heu)
 elif(BorH=='1'):
     cur,count= hillclimbing(heu)
@@ -237,7 +237,7 @@ for j in cur:
         cu=cu+k
     cu= cu+' '
 
-print(cur)
+
 print("the sequence of moves to reach goal state(read from the end):")
 while(starts!= cu):
     print(f"{cu}")
@@ -245,7 +245,4 @@ while(starts!= cu):
 
 print(starts)
 print("the sequence of moves to reach goal state(read from the end):")
-
-
-
 print(f"time taken= {time.time()-starttime}")
