@@ -8,9 +8,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{color}
 \usepackage{amsmath}
-\graphicspath{{C:\Users\tkhal\Desktop\College\Second Yr\Data Analysis EE201\Project\Question 2}}
 
-\title{AI Assignment-1 Report}
+\title{AI Assignment-2 Report}
 \vspace{20pt}
 \vspace{20pt}
 \date{\today}
@@ -27,16 +26,14 @@
 \newpage
 \pagenumbering{arabic}
 \section{Approach}
-The basic approach we used for the A.I assignment is to use the concept of graphs \& vertices and 
-applied BFS\{Breadth First Search\} , DFS \{Depth First Search\} and DFID \{Depth First Iterative Deepening Search\}.
+The basic approach we used for the A.I assignment is to use the concept of Heuristic Search Algorithms and 
+apply BFS \{Best First Search\} and Hill-climbing.
 \vspace{10pt}
-\\
-Along with applying the above algorithms for the PacMan , we have also set the preference order for adding the neighbor nodes which are:
-\\$$DOWN > UP > RIGHT > LEFT$$
-\vspace{10pt}
-\\If the input number $\in \{0,1,2\}$ , then the program executes the algorithms BFS , DFS and DFID respectively .
-\vspace{10pt}
-\\After visiting the neighbors in the maze graph, We can easily find out the length of the path and the number of states for the maze.
+\subsection*{State Space}
+\subsection*{Start \& Goal Node}
+\begin{itemize}
+    \item \textbf{Start Node} 
+\end{itemize}
 \newpage
 \section{Variables used in Python Program}
 \vspace{20pt}
@@ -121,37 +118,17 @@ def move\_gen(i,j,graph\_input):
 \newpage
 \section{Graphical Analysis}
 \vspace{5pt}
-Based on observation , we have plotted the following time vs size of maze graph for BFS and DFS .
-\vspace{20pt}
-\\\includegraphics[scale=0.3]{time.jpg}
-\\By far , we have observed that DFID is the slowest initially but potentially more better for bigger mazes .
-\vspace{20pt}
-\\Here is the following table depicting the dependence of no. of states and path length on priority order [U : Up, D : Down , R : Right, L :Left].
-\vspace{10pt}
-\\\includegraphics{table.jpg}
+Based on observation , we have plotted the following .
 \newpage
 \section{Results}
 \vspace{20pt}
 The following conclusions have been made after evaluation of my program : 
 \begin{enumerate}
-    \item The Output for the first test case :
-    \\\includegraphics{Output1.jpg}
-    \item The Output for the second test case :
-    \\\includegraphics{Output2.jpg}
-\newpage
-    \item The Output for the third test case :
-    \\\includegraphics{Output3.jpg}
-    \item The Output for the fourth test case :
-    \\\includegraphics{Output4.jpg}
-\newpage
-    \item The Output for the fifth test case :
-    \\\includegraphics{Output5.jpg}
-    \item The Output for the sixth test case :
-    \\\includegraphics{Output6.jpg}
+    \item :)
 \end{enumerate}
 \vspace{20pt}
 \subsection*{Conclusion}
-\textbf{Thus , BFS, DFS and DFID algorithms which are uninformed search methods always gives the solution to the problem , but it might not be optimal in every case .}
+Dont know .
 \newpage
 \section{References}
 \vspace{30pt}
@@ -159,6 +136,5 @@ The following conclusions have been made after evaluation of my program :
     \item \url{http://geeksforgeeks.com}
     \item \url{https://wikipedia.org}
     \item \url{https://stackoverflow.com}
-    \item \url{http://www.delorie.com/game-room/mazes/genmaze.cgi}
 \end{itemize}
 \end{document}
