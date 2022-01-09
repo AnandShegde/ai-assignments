@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  2 JAN 2022 20:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  2 JAN 2022 21:53
 entering extended mode
 **c:/Users/tkhal/Documents/GitHub/ai-assignments/AI-Assignment-2/AI_Assignment_Report.tex
 (c:/Users/tkhal/Documents/GitHub/ai-assignments/AI-Assignment-2/AI_Assignment_Report.tex
@@ -241,7 +241,7 @@ Overfull \hbox (8.51988pt too wide) in paragraph at lines 139--145
  []
 
 [5 <./Graph.jpg>] [6 <./Graph1.jpg>]
-Overfull \hbox (8.0829pt too wide) in paragraph at lines 160--166
+Overfull \hbox (8.0829pt too wide) in paragraph at lines 161--167
 \OT1/cmr/m/n/10 nodes/states in $\OML/cmm/m/it/10 O\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 b[]\OT1/cmr/m/n/10 )$ , whereas in Hill-Climbing al-go-rithm not all the nodes/states
  []
 
@@ -253,9 +253,9 @@ Here is how much of TeX's memory you used:
  21120 multiletter control sequences out of 15000+600000
  406204 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,5n,70p,350b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,5n,70p,381b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\tkhal\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on AI_Assignment_Report.pdf (10 pages, 186686 bytes).
+Output written on AI_Assignment_Report.pdf (10 pages, 186642 bytes).
 PDF statistics:
  87 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
