@@ -6,9 +6,9 @@ from operator import itemgetter
 import time
 from numpy.core.fromnumeric import shape, sort
 import itertools as iter
-no_var = 20
+no_var = 6
 count=0
-no_clauses= 100
+no_clauses= 30
 parent={}
 closed= []
 open_list = []
@@ -79,13 +79,13 @@ def goal_state(formula,inpu):
 
 
 
-
+exitrec=0
 
 
 #VND
 def vnd(formula,inpu,toggle):
     print(inpu)
-    global count
+    global count,exitrec
     global no_clauses,no_var
     if(toggle==no_var+1):
         print(f"you can never reach the goal state\ncount= {count}")
@@ -101,8 +101,11 @@ def vnd(formula,inpu,toggle):
         if(goal_state(formula,cur)):
             print("you have reached the goal.")
             print(cur,count)
-            exit()
+            exitrec=1
+            return
         
+        if(exitrec==1):
+            return
         
         cur_heu= no_of_clauses(formula,cur)
         neighbours= movegen(cur,toggle)
@@ -134,9 +137,12 @@ def vnd(formula,inpu,toggle):
                 print(heap)
                 print('\n\n\n')
                 print("circuit is not satisfiable")
-                exit()
+                exitrec=1
+                return
             print(f"couldn't find soln with toggle = {toggle} ie local maxima reached. local maxima is {cur},{no_of_clauses(formula,cur)}")
             vnd(formula,cur,toggle+1)
+            if(exitrec==1):
+                return 
         else:
             toggle=1
 
@@ -147,25 +153,35 @@ def vnd(formula,inpu,toggle):
                 print(heap)
                 print('\n\n\n')
                 print("circuit is not satisfiable")
-                exit()
+                exitrec=1
+                return
             print(f"couldn't find soln with toggle = {toggle} ie local maxima reached. local maxima is {cur},{no_of_clauses(formula,cur)}")
             vnd(formula,cur,toggle+1)
+            if(exitrec==1):
+                return 
+
             
 def beam_search(formula,inpu,beamwidth):
-    toggle=1
-    print(inpu)
+    
+    
     global count
     global no_clauses,no_var
     
     cur = inpu
     open_list.extend(inpu)
+    prevmax=0
+    for i in cur:
+        print(f"{i}:{no_of_clauses(formula,i)} ",end='')
+        prevmax= max(prevmax,no_of_clauses(formula,i))
+    print()
+    print(prevmax)
 
     while(True):
         closed.extend(cur)
         count+=len(cur)
         for j in cur:
             open_list.remove(j)
-            print(j)
+            
             if(goal_state(formula,j)):
                 print("you have reached the goal.")
                 print(j,count)
@@ -174,8 +190,8 @@ def beam_search(formula,inpu,beamwidth):
             cur_heu= no_of_clauses(formula,j)
             neighbours= movegen(j,1)
             
-            if cur in neighbours:
-                neighbours.remove(cur)
+            if j in neighbours:
+                neighbours.remove(j)
             
             
             heap= []
@@ -193,16 +209,113 @@ def beam_search(formula,inpu,beamwidth):
             print("circuit is not satisfiable")
             exit()
         next_states=[]
-        for _ in range(beamwidth):       
+        max_heuristic=0
+        for _ in range(beamwidth):
+            if(len(heap)==0):
+                break   
             current_heap = copy.deepcopy(max(heap,key=itemgetter(1))[:beamwidth]) 
             heap.remove(current_heap)
-            next_states.append(current_heap[0])
-        
-        
 
+            next_states.append(current_heap[0])
+            max_heuristic= max(max_heuristic,current_heap[1])
+        
+        if(max_heuristic<prevmax):
+            print(f"stuck in a local maxima, couldn't find the solution\n current max={prevmax}, maxstate={cur[-1]} ")
+            exit()
+
+        
         beam_search(formula,next_states,beamwidth)
 
+
+tenure = []
+def movegen_tabu(state,t):
+    global tenure
+    best_state = ""
+    best_heu = -1 
+    index=-1
+    for i in range(len()):
+        if(tenure[i] == 0):
+            if(state[i] == '1'):
+                new_state = state[:i] + "0" + state[i+1:]
+            else:
+                new_state = state[:i] + "1" + state[i+1:]
+            if(new_state not in closed):
+                tenure[i] = t
+                h = heuristic(new_state)
+                if(h>best_heu):
+                    index = i
+                    best_heu = h
+                    best_state = copy.deepcopy(new_state)
+    if(best_state != ""):
+        return [best_state,best_heu,index]
+    else:
+        return 0
+    
+
+def movegen_restricted(state,t):
+    global tenure
+    best_state = ""
+    best_heu = -1 
+    index = -1
+    for i in range(n):
+        if(tenure[i] != 0):
+            if(state[i] == '1'):
+                new_state = state[:i] + "0" + state[i+1:]
+            else:
+                new_state = state[:i] + "1" + state[i+1:]
+            if(new_state not in closed):
+                h = heuristic(new_state)
+                if(h>best_heu):
+                    index = i
+                    best_heu = h
+                    best_state = copy.deepcopy(new_state)
+    if(best_state != ""):
+        return [best_state,best_heu,index]
+    else:
+        return 0
+
+def tabu(state,t):
+    global closed,ts 
+    condition = True
+    best_state = ""
+    best_heuristic = -1
+    while(condition == True): 
+        tf = time.time()
+        if(tf-ts > 10):
+            f_out.write("Goal state can't be reached lol\n")
+            return state       
+        heap = []
+        closed.append(state)        
+        prev_heu = heuristic(state)
+        prev_state = copy.deepcopy(state)
+        if(prev_heu > best_heuristic):
+            best_state = copy.deepcopy(prev_state)
+            best_heuristic = prev_heu
+
+        if(prev_heu == k):
+            f_out.write("goal state reached\n")
+            return state
+        next_node = movegen_tabu(state, t)
+
+        if(next_node != 0):
+            state = copy.deepcopy(next_node[0])
+            prev_heu = next_node[1]
+            tenure[next_node[2]] = tenure[next_node[2]] - 1
+
+        else:
+            res_node = movegen_restricted(state,t)
+            if(res_node != 0 ):
+                state = copy.deepcopy(res_node[0])
+                prev_heu = res_node[1]
+                tenure[res_node[2]] = tenure[res_node[2]]-1
+            else:
+                f_out.write("Goal state cannot be reached\n")
+                return state
+
+    return state
+
         
-beam_search(formu,[input_variables],3)
+
 
 vnd(formu,input_variables,1)
+beam_search(formu,[input_variables],6)
