@@ -301,14 +301,20 @@ def tabu(state,t,formula):
         if(next_node != 0):
             state = copy.deepcopy(next_node[0])
             prev_heu = next_node[1]
-            tenure[next_node[2]] = tenure[next_node[2]] - 1
+            for i in range(len(tenure)):
+                if(tenure[i]!=0):
+                    tenure[i]-=1
+            tenure[next_node[2]] = t
 
         else:
             res_node = movegen_restricted(state,t)
             if(res_node != 0 ):
                 state = copy.deepcopy(res_node[0])
                 prev_heu = res_node[1]
-                tenure[res_node[2]] = tenure[res_node[2]]-1
+                for i in range(len(tenure)):
+                    if(tenure[i]!=0):
+                        tenure[i]-=1
+                tenure[res_node[2]] =t
             else:
                 fout.write("goal state cannot be reached")
                 print("goal state cannot be reached")
