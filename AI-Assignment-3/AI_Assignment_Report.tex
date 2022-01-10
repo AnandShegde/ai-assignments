@@ -88,43 +88,43 @@ def move\_gen(state,bits\_toggled):
         \vspace{5pt}
         \\ \hspace*{20pt} return 0
 \newpage
-\section{Heuristic functions}
-\subsection{Heuristic 1}
-\begin{itemize}
-    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
-    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
-    \item This heuristic function assigns the value :
-    \begin{enumerate}
-        \item+1 to the blocks of the current stack which
-        are present in their correct position with respect to the goal state's blocks .
-        \item$-1$ to the blocks which are not present in their right position
-        with respect to the goal state .
-    \end{enumerate}
-    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
-    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
-\end{itemize}
-\subsection{Heuristic 2}
-\begin{itemize}
-    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
-    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
-    \item This heuristic function assigns the value :
-    \begin{enumerate}
-        \item+h to those blocks of the current stack which
-        have the same height as of that to the goal state's blocks , where h is the height of the block.
-        \item$-h$ to the blocks which do not have the same height with respect to the
-        goal state's blocks , where h is the height of the block .
-    \end{enumerate}
-    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
-    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
-\end{itemize}
-
-\subsection{Heuristic 3}
-\begin{itemize}
-    \item This function turns the Block problem into a minimization problem for the Best First Search Algorithm .
-    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
-    \item The sum of the Euclidean distances of each of the blocks in a state gives us the heuristic value for that state .
-    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
-\end{itemize}
+\section{Heuristic function}
+\vspace{10pt}
+We are considering the no. of satisfied clauses as the heuristic for our program.
+If the heuristic value is n , i.e. no. of clauses, then that node is our goal state.
+\subsection*{Code Part:}
+\vspace{5pt}
+    def evaluate\_clause(clause,inpu):
+        \vspace{2pt}
+        \\ \hspace*{20pt}for i in clause:
+        \vspace{2pt}
+        \\ \hspace*{30pt}if(i$>$0):
+        \vspace{2pt}
+        \\ \hspace*{50pt} if(inpu[i-1]=='1'):
+        \vspace{2pt}
+        \\ \hspace*{70pt} return 1
+        \vspace{2pt}
+        \\ \hspace*{30pt} else:
+        \vspace{2pt}
+        \\ \hspace*{50pt} if(inpu[i-1]=='1'):
+        \vspace{2pt}
+        \\ \hspace*{70pt} return 1
+        \vspace{2pt}
+        \\ \hspace*{20pt} return 0
+\vspace{15pt}
+        \\def no\_of\_clauses(all\_clauses,inpu):
+            \vspace{2pt}
+            \\ \hspace*{20pt}no = 0
+            \vspace{2pt}
+            \\ \hspace*{20pt}for i in clause:
+            \vspace{2pt}
+            \\ \hspace*{30pt}if(evaluate\_clause(i,inpu)):
+            \vspace{2pt}
+            \\ \hspace*{50pt} no += 1
+            \vspace{2pt}
+            \\ \hspace*{20pt} return no
+\newpage
+\section{VND\hspace*{5pt} \{Variable Neighborhood Descent\}}
 \newpage
 \section{Analysis \& Observations}
 \vspace{5pt}
