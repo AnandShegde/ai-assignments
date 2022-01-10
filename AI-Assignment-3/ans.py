@@ -8,9 +8,9 @@ from numpy.core.fromnumeric import shape, sort
 import itertools as iter
 
 
-no_var = 10 # no of literals
+no_var = 4 # no of literals
 count= 0 # no of states explored
-no_clauses= 40 # no of clauses
+no_clauses= 16 # no of clauses
 parent={} #parent of a node
 closed= [] # closed list
 open_list = [] #open list
@@ -237,13 +237,13 @@ def movegen_tabu(state,t):
                 new_state = state[:i] + "0" + state[i+1:]
             else:
                 new_state = state[:i] + "1" + state[i+1:]
-            if(new_state not in closed):
-                tenure[i] = t
-                h = no_of_clauses(formu,new_state)
-                if(h>best_heu):
-                    index = i
-                    best_heu = h
-                    best_state = copy.deepcopy(new_state)
+            # if(new_state not in closed):
+            tenure[i] = t
+            h = no_of_clauses(formu,new_state)
+            if(h>best_heu):
+                index = i
+                best_heu = h
+                best_state = copy.deepcopy(new_state)
     if(best_state != ""):
         return [best_state,best_heu,index]
     else:
@@ -261,12 +261,12 @@ def movegen_restricted(state,t):
                 new_state = state[:i] + "0" + state[i+1:]
             else:
                 new_state = state[:i] + "1" + state[i+1:]
-            if(new_state not in closed):
-                h = no_of_clauses(formu,new_state)
-                if(h>best_heu):
-                    index = i
-                    best_heu = h
-                    best_state = copy.deepcopy(new_state)
+            # if(new_state not in closed):
+            h = no_of_clauses(formu,new_state)
+            if(h>best_heu):
+                index = i
+                best_heu = h
+                best_state = copy.deepcopy(new_state)
     if(best_state != ""):
         return [best_state,best_heu,index]
     else:
@@ -293,6 +293,7 @@ def tabu(state,t,formula):
 
         if(goal_state(formula,state)):
             print("goal state is reached")
+            print(len(closed))
             print(state)
             print(no_of_clauses(formula,state))
             return
@@ -326,14 +327,15 @@ def tabu(state,t,formula):
 
 fout.write("\n\n\nVND\n")
 vnd(formu,input_variables,1)
-
+# formula = [[4, -3, 2], [-2, 4, -1], [2, -4, 1], [-4, 2, 3], [-2, 4, 1], [4, 1, -2], [3, -4, -2], [-3, 4, -1], [4, -3, 1], [-3, 4, 2], [2, -1, 4], [2, -1, 3], [-1, -3, -4], [-2, -3, -4], [-1, 4, 2], [-4, -1, -3], [-1, -4, -2], [1, 3, -2], [2, 4, 3], [-2, 4, -3]]
+# initialState = "0110"
 exitrec= 0
 fout.write("\n\n\nBEAM SEARCH\n")
 print("\n\n\nBEAM SEARCH\n")
-beam_search(formu,[input_variables],10)
+beam_search(formu,[input_variables],2)
 
 
 fout.write("\n\n\nTABU SEARCH\n")
 print("\n\n\nTABU SEARCH\n")
 ts= time.time()
-tabu(input_variables,3,formu)
+tabu(input_variables,6,formu)
