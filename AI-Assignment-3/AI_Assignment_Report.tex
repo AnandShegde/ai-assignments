@@ -1,0 +1,167 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{authblk}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{amsmath}
+
+\title{AI Assignment-3 Report}
+\vspace{20pt}
+\vspace{20pt}
+\date{\today}
+\author{Team -14 \\Tabish Khalid Halim , \\ 200020049 \\ Anand Hegde , \\ 200020007}
+\vspace{20pt}
+\affil{Department of Computer Science, IIT Dharwad}
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\section{Problem Statement}
+We are given the question to find the satisfiability of a Uniform 4-SAT \{which is a family of SAT problems distribution obtained from generating 4-CNF formulae randomly.\}
+\\So , if all the clauses are true , then we can prove the satisfability of a formula .
+\vspace{10pt}
+\section{Approach}
+The basic approach we used for the A.I assignment is to use the concept \\of Exploration and 
+apply VND \{Variable Neighborhood Descent\}, Beam Search and Tabu Search.
+\vspace{10pt}
+\subsection*{State Space}
+A state space is the set of all configurations that a given problem and its \\environment could achieve .
+\vspace{10pt}
+\\We have been given with the fact that there are n bits of strings of 0s and 1s for an n variable state space.
+\\Thus , the total number of state spaces in the state space set is $2^n$ .
+\subsection*{Start \& Goal node}
+The Start node is a randomly generated n bit string which will be
+a part of the state space that will be 
+given in 'input.txt' file.
+\\The Goal Node is a part of the state space that represents the final/goal state to be reached through
+our algorithm .
+\\One such example is the following :
+\\For $n=5$ i.e. 5 variables,
+\\Start Node :
+\\10001
+\\Goal Node :
+\\10101
+\newpage
+\section{Pseudo Code}
+The main pseudo code used in our assignment is as follows :
+\subsection*{move\_gen function}
+\vspace{5pt}
+def move\_gen(state,bits\_toggled):
+\vspace{5pt}
+    \vspace{2pt}
+    \\ \hspace*{20pt}neighbors = [ ]
+    \vspace{2pt}
+    \\ \hspace*{20pt}comb = iter.combinations(0 to total no. of states)),bits\_toggled)
+    \vspace{2pt}
+    \\ \hspace*{20pt}for i in comb:
+    \vspace{2pt}
+    \\ \hspace*{30pt}new= state
+    \vspace{2pt}
+    \\ \hspace*{30pt}for j in i:
+    \vspace{2pt}
+    \\ \hspace*{40pt}j= int(j)
+    \vspace{2pt}
+    \\ \hspace*{40pt}new= new[:j]+str((int(new[j])+1)\%2)+new[j+1:]
+    \vspace{2pt}
+    \\ \hspace*{70pt}neighbors.append(new)
+    \vspace{2pt}
+    \\ \hspace*{20pt}return neighbors
+
+\subsection*{goal\_state function}
+    \vspace{5pt}
+    def goal\_state(formula,inpu):
+        \vspace{5pt}
+        \\ \hspace*{20pt}global no\_clauses
+        \vspace{5pt}
+        \\ \hspace*{20pt}if(no\_of\_clauses(formula,inpu)==no\_clauses):
+        \vspace{5pt}
+        \\ \hspace*{30pt} return 1
+        \vspace{5pt}
+        \\ \hspace*{20pt} return 0
+\newpage
+\section{Heuristic functions}
+\subsection{Heuristic 1}
+\begin{itemize}
+    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item This heuristic function assigns the value :
+    \begin{enumerate}
+        \item+1 to the blocks of the current stack which
+        are present in their correct position with respect to the goal state's blocks .
+        \item$-1$ to the blocks which are not present in their right position
+        with respect to the goal state .
+    \end{enumerate}
+    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+\subsection{Heuristic 2}
+\begin{itemize}
+    \item This function turns the Block problem into a maximization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item This heuristic function assigns the value :
+    \begin{enumerate}
+        \item+h to those blocks of the current stack which
+        have the same height as of that to the goal state's blocks , where h is the height of the block.
+        \item$-h$ to the blocks which do not have the same height with respect to the
+        goal state's blocks , where h is the height of the block .
+    \end{enumerate}
+    \item The sum of the assigned values to each of the blocks gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+
+\subsection{Heuristic 3}
+\begin{itemize}
+    \item This function turns the Block problem into a minimization problem for the Best First Search Algorithm .
+    \item A block is in its correct position iff it is present in the correct stack with appropriate height .  
+    \item The sum of the Euclidean distances of each of the blocks in a state gives us the heuristic value for that state .
+    \item The higher the heuristic value of a given state, the more priority is given to it during the BFS search .
+\end{itemize}
+\newpage
+\section{Analysis \& Observations}
+\vspace{5pt}
+Based on observation , we have plotted the following graphs for Best First Search Algorithm :
+%\\\includegraphics[scale=0.9]{Graph.jpg}
+%\includegraphics{Graph1.jpg}
+\vspace{5pt}
+\\From the above graphs , we have analysed that the best first search algorithm always finds the best and optimal solution
+but at the cost of time consumed is high as BFS has a time complexity of O($b^d$) .
+\newpage
+\section{Results}
+\vspace{20pt}
+The following conclusions have been made after evaluation of our program :
+\begin{description}
+    \item[States Explored :]The Hill-Climbing algorithm in general will have lesser no. of states explored than that of BFS .
+    In the worst scenario, the best first search algorithm will explore all the states but Hill-Climbing algorithm will explore uptill $O(bd)$ 
+    ,\\ where b = the maximum beam width 
+    \\\hspace*{29pt}d = the depth of the search graph from the start state.
+    \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
+    \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
+    but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
+    \item[Completeness :] The Best First Search Algorithm is Complete as it explores all the states sooner or later. But the Hill Climbing Algorithm is not complete. As it almost always gets stuck in local minima if we do not come up with a really good heuristic.
+\end{description}
+\vspace{20pt}
+\subsection*{Conclusion}
+The Best First Search Algorithm is the more optimal choice as it helps to solve the given problem
+efficiently . 
+\vspace{5pt}
+\\Although it takes more time than the Hill-Climbing algorithm, it ensures that the best solution
+has been found to reach the goal state by exploring all the nodes/states in $O(b^d)$ , whereas in Hill-Climbing algorithm
+not all the nodes/states are visited as sometimes the algorithm gets stuck at a local extremum while finding the optimal path to the goal state.
+\newpage
+\section{References}
+\vspace{30pt}
+\begin{itemize}
+    \item \url{http://geeksforgeeks.com}
+    \item \url{https://wikipedia.org}
+    \item \url{https://stackoverflow.com}
+\end{itemize}
+\end{document}
