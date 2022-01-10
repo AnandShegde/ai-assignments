@@ -1,0 +1,13 @@
+the initial guess=0111111100 its heuristic= 32
+
+
+VND
+
+
+
+BEAM SEARCH
+
+
+
+TABU SEARCH
+goal state cannot be reached

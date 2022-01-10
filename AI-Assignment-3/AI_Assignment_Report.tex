@@ -92,7 +92,7 @@ def move\_gen(state,bits\_toggled):
 \vspace{10pt}
 We are considering the no. of satisfied clauses as the heuristic for our program.
 If the heuristic value is n , i.e. no. of clauses, then that node is our goal state.
-\subsection*{Code Part:}
+\subsection*{Pseudo Code:}
 \vspace{5pt}
     def evaluate\_clause(clause,inpu):
         \vspace{2pt}
@@ -124,11 +124,19 @@ If the heuristic value is n , i.e. no. of clauses, then that node is our goal st
             \vspace{2pt}
             \\ \hspace*{20pt} return no
 \newpage
-\section{VND\hspace*{5pt} \{Variable Neighborhood Descent\}}
+%\section{VND\hspace*{5pt} \{Variable Neighborhood Descent\}}
+%We already know that in order to escape the local maxima 
+%we have to make the neighborhood denser which can be achieved 
+%by increasing the no. of bits to be toggled .
+\section{Beam Search Analysis}
+The time taken to reach the goal state increases exponentially as the input size increases.
+\\Also , as the width of the beam search is increased , we see that the computation time 
+of the beam search to reach the goal state also increases.
+\section{Tabu Search Analysis}
 \newpage
 \section{Analysis \& Observations}
 \vspace{5pt}
-Based on observation , we have plotted the following graphs for Best First Search Algorithm :
+Based on observation , we have plotted the following graphs :
 %\\\includegraphics[scale=0.9]{Graph.jpg}
 %\includegraphics{Graph1.jpg}
 \vspace{5pt}

@@ -2,7 +2,8 @@
 \contentsline {section}{\numberline {2}Approach}{1}{}%
 \contentsline {section}{\numberline {3}Pseudo Code}{2}{}%
 \contentsline {section}{\numberline {4}Heuristic function}{3}{}%
-\contentsline {section}{\numberline {5}VND\hspace *{5pt} \{Variable Neighborhood Descent\}}{4}{}%
-\contentsline {section}{\numberline {6}Analysis \& Observations}{5}{}%
-\contentsline {section}{\numberline {7}Results}{6}{}%
-\contentsline {section}{\numberline {8}References}{7}{}%
+\contentsline {section}{\numberline {5}Beam Search Analysis}{4}{}%
+\contentsline {section}{\numberline {6}Tabu Search Analysis}{4}{}%
+\contentsline {section}{\numberline {7}Analysis \& Observations}{5}{}%
+\contentsline {section}{\numberline {8}Results}{6}{}%
+\contentsline {section}{\numberline {9}References}{7}{}%
