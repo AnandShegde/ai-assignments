@@ -6,7 +6,8 @@ from operator import itemgetter
 import time
 from numpy.core.fromnumeric import shape, sort
 import itertools as iter
-
+import time
+start_time = time.time()
 
 no_var = 10 # no of literals
 count= 0 # no of states explored
@@ -323,7 +324,7 @@ def tabu(state,t,formula):
     return state
   
 
-
+print("--- %s seconds ---" % (time.time() - start_time))
 fout.write("\n\n\nVND\n")
 vnd(formu,input_variables,1)
 
