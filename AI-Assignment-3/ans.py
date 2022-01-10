@@ -327,8 +327,7 @@ def tabu(state,t,formula):
 
 fout.write("\n\n\nVND\n")
 vnd(formu,input_variables,1)
-# formula = [[4, -3, 2], [-2, 4, -1], [2, -4, 1], [-4, 2, 3], [-2, 4, 1], [4, 1, -2], [3, -4, -2], [-3, 4, -1], [4, -3, 1], [-3, 4, 2], [2, -1, 4], [2, -1, 3], [-1, -3, -4], [-2, -3, -4], [-1, 4, 2], [-4, -1, -3], [-1, -4, -2], [1, 3, -2], [2, 4, 3], [-2, 4, -3]]
-# initialState = "0110"
+
 exitrec= 0
 fout.write("\n\n\nBEAM SEARCH\n")
 print("\n\n\nBEAM SEARCH\n")
