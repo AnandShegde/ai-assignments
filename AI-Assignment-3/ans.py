@@ -203,7 +203,7 @@ def beam_search(formula,inpu,beamwidth):
         for _ in range(beamwidth): # we need "beamlength" no of next neighbours.
             if(len(heap)==0):
                 break   
-            current_heap = copy.deepcopy(max(heap,key=itemgetter(1))[:beamwidth]) # i take the maximum among the neighours and add it to our next states list.
+            current_heap = copy.deepcopy(max(heap,key=itemgetter(1))) # i take the maximum among the neighours and add it to our next states list.
             heap.remove(current_heap) # remove the current max, so that i can get the next maximum in next iteration.
             next_states.append(current_heap[0])
 
@@ -279,7 +279,7 @@ def tabu(state,t,formula):
     best_heuristic = -1
     while(condition == True): 
         tf = time.time()
-        if(tf-ts > 10):
+        if(tf-ts > 5):
             print("Goal state can't be reached\n")
             fout.write("Goal state can't be reached\n")
             return state       
@@ -325,17 +325,25 @@ def tabu(state,t,formula):
     return state
   
 
-print("--- %s seconds ---" % (time.time() - start_time))
-fout.write("\n\n\nVND\n")
-vnd(formu,input_variables,1)
+for _ in range(1,5):       
+    fout.write("\n\n\nVND\n")
+    start_time=time.time()
+    vnd(formu,input_variables,1)
+    print("--- %s seconds ---" % (time.time() - start_time))
+    exitrec= 0
+    fout.write(f"\n\n\nBEAM SEARCH with width={_} \n")
+    print(f"\n\n\nBEAM SEARCH with width={_} \n")
+    start_time=time.time()
+    beam_search(formu,[input_variables],_)
+    print("--- %s seconds ---" % (time.time() - start_time))
 
-exitrec= 0
-fout.write("\n\n\nBEAM SEARCH\n")
-print("\n\n\nBEAM SEARCH\n")
-beam_search(formu,[input_variables],2)
-
-
-fout.write("\n\n\nTABU SEARCH\n")
-print("\n\n\nTABU SEARCH\n")
-ts= time.time()
-tabu(input_variables,6,formu)
+    fout.write("\n\n\nTABU SEARCH with tenure={_}\n")
+    print(f"\n\n\nTABU SEARCH with tenure={_}\n")
+    ts=time.time()
+    start_time=time.time()
+    tabu(input_variables,_,formu)
+    print("--- %s seconds ---" % (time.time() - start_time))
+    parent={} #parent of a node
+    closed= [] # closed list
+    open_list = [] #open list
+    formu= [] 
