@@ -1,23 +1,22 @@
-no of clauses= 10
-no of variables=30
-the initial guess=010000100110100100101111001100 
-its heuristic= 8
+no of clauses= 250
+no of variables=120
+the initial guess=111111000010001111011001110010101100110011101000001011100110011110100000001011010000100111110111011001000111010001100011 
+its heuristic= 219
 
 
 VND
 You have reached the goal.
-no of states explored=3
-final state=110100100110100100101111001100 
+no of states explored=25
+final state=000111101011001011001001000011101100110000101001000011000100011100100100001011110100100111110111010011000101010001100011 
 
 
 BEAM SEARCH with width=1 
+stuck in a local maxima, couldn't find the solution
+Goal state= -
+No of states explored= 45 
+
+
+TABU SEARCH with tenure=24
 You have reached the goal
-Goal state= 110100100110100100101111001100
-No of states explored=6
-
-
-
-TABU SEARCH with tenure=3
-You have reached the goal
-Goal state= 110100100110100100101111001100
-No of states explored=3
+Goal state= 000001111010000001001101000010101100110000101001000011000100011100100100001011010100100111110111010011000100010001100011
+No of states explored=31

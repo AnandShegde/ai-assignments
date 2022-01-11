@@ -136,9 +136,11 @@ nodes get explored, more is the chance of finding the goal state.
 \\\includegraphics[scale=0.3]{BeamSearch.jpg}
 \newpage
 \section{Tabu Search Analysis}
-We have plotted the following results for Tabu Search with different values of Tabu Tenure .
+We have compiled the following results for Tabu Search with different values of Tabu Tenure .
 \vspace*{10pt}
 \\\hspace*{50pt}\includegraphics{Table2.jpg}
+\vspace*{10pt}
+\\Here is a graph for different Tabu Tenures with number of clauses = 10. 
 \\\includegraphics[scale=0.35]{TabuSearch.jpg}
 \newpage
 \section{Analysis \& Observations}
@@ -148,30 +150,27 @@ Based on observation , we have compiled the following data pertaining to VND, Be
 \\\includegraphics[scale=0.7]{Table1.jpg}
 \vspace*{10pt}
 \\In the above table , the green cells represents success of finding the goal state and the red cells represents the failure of reaching to the goal state.
-\\
+\vspace*{10pt}
+\\Here is the graphical analysis for VND. 
+\\\includegraphics{VND.png}
 %\includegraphics{Graph1.jpg}
 \newpage
-%\section{Results}
+\section{Results}
+\vspace{20pt}
+The following conclusions have been made after evaluation of our program :
+\begin{description}
+    \item[VND \{Variable Neighborhood Descent\} :] If there exist a solution to reach the goal state then this algorithm is considerably fast 
+    but , if there does not exist a solution then, it will be very slow.  
+    \item[Beam Search Algorithm :] As the beam width of Beam Search Algorithm increases , the time taken also increases but the possibility to reach the goal state will also increase.
+    \item[Tabu Search Algorithm :] If the tabu tenure is very low , then the algorithm will roam around the local optima but if the tabu tenure very high then the algorithm will explore very few nodes
+    but for a well chosen tenure , we will reach the goal state in a very short amount of time. 
+    \\We can conclude that the optimal value of the Tabu Tenure should be around :
+    No. of literals/5 \{ if $n\geq10$ , otherwise 2\}
+\end{description}
 %\vspace{20pt}
-%The following conclusions have been made after evaluation of our program :
-%\begin{description}
-%    \item[States Explored :]The Hill-Climbing algorithm in general will have lesser no. of states explored than that of BFS .
-%    In the worst scenario, the best first search algorithm will explore all the states but Hill-Climbing algorithm will explore uptill $O(bd)$ 
- %   ,\\ where b = the maximum beam width 
- %   \\\hspace*{29pt}d = the depth of the search graph from the start state.
-%    \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
-%    \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
-%    but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
-%    \item[Completeness :] The Best First Search Algorithm is Complete as it explores all the states sooner or later. But the Hill Climbing Algorithm is not complete. As it almost always gets stuck in local minima if we do not come up with a really good heuristic.
-%\end{description}
-%\vspace{20pt}
-\subsection*{Conclusion}
-The Best First Search Algorithm is the more optimal choice as it helps to solve the given problem
-efficiently .
-\vspace{5pt}
-\\Although it takes more time than the Hill-Climbing algorithm, it ensures that the best solution
-has been found to reach the goal state by exploring all the nodes/states in $O(b^d)$ , whereas in Hill-Climbing algorithm
-not all the nodes/states are visited as sometimes the algorithm gets stuck at a local extremum while finding the optimal path to the goal state.
+\section{Conclusion}
+All the above described algorithms help to overcome the problem of escaping local minima and
+they work reasonably well when the hyper-parameters like Tabu Tenure and Beam Width are chosen wisely. 
 \newpage
 \section{References}
 \vspace{30pt}
