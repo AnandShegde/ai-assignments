@@ -1,10 +1,10 @@
 \contentsline {section}{\numberline {1}Problem Statement}{1}{}%
 \contentsline {section}{\numberline {2}Approach}{1}{}%
 \contentsline {section}{\numberline {3}Pseudo Code}{2}{}%
-\contentsline {section}{\numberline {4}Heuristic function}{3}{}%
-\contentsline {section}{\numberline {5}Beam Search Analysis}{4}{}%
-\contentsline {section}{\numberline {6}Tabu Search Analysis}{5}{}%
-\contentsline {section}{\numberline {7}Analysis \& Observations}{6}{}%
-\contentsline {section}{\numberline {8}Results}{7}{}%
-\contentsline {section}{\numberline {9}Conclusion}{7}{}%
-\contentsline {section}{\numberline {10}References}{8}{}%
+\contentsline {section}{\numberline {4}Heuristic function}{4}{}%
+\contentsline {section}{\numberline {5}Beam Search Analysis}{5}{}%
+\contentsline {section}{\numberline {6}Tabu Search Analysis}{6}{}%
+\contentsline {section}{\numberline {7}Analysis \& Observations}{7}{}%
+\contentsline {section}{\numberline {8}Results}{8}{}%
+\contentsline {section}{\numberline {9}Conclusion}{8}{}%
+\contentsline {section}{\numberline {10}References}{9}{}%
