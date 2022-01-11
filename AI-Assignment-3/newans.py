@@ -51,6 +51,8 @@ fout.write(f"the initial guess={input_variables} \n")
 def evaluate_clause(clause,inpu): # checks whether given clause is true for the given value of the literals.
     for i in clause:
         if(i>0):
+            #inpu[i] represents whether i+1 th bit is 0 or 1.
+            #So if i to check whether '5' is 0 or 1, the index that i should give is 5-1='4'. 
             if(inpu[i-1]=='1'): #if anyone of the literal is 1 in the clause, then it is satisfied.
                 return 1
         else:
