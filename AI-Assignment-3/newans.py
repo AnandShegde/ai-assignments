@@ -6,11 +6,15 @@ from operator import itemgetter
 import time
 from numpy.core.fromnumeric import shape, sort
 import itertools as iter
-
-
-no_var = 4 # no of literals
+import time
+start_time = time.time()
+fin= open("input.txt","r")
+lines= fin.readlines()
+no_var = int(lines[0]) # no of literals
 count= 0 # no of states explored
-no_clauses= 30 # no of clauses
+no_clauses= int(lines[1]) # no of clauses
+beam_width=int(lines[2])
+tabu_tenure= int(lines[3])
 parent={} #parent of a node
 closed= [] # closed list
 open_list = [] #open list
@@ -40,7 +44,9 @@ input_variables= list(input_variables)
 input_variables = ''.join(map(str, input_variables)) # converting the list into a string.
 
 print(f"the initial guess={input_variables} ")
-fout.write(f"the initial guess={input_variables} ")
+fout.write(f"no of clauses= {no_clauses}\nno of variables={no_var}\n")
+fout.write(f"the initial guess={input_variables} \n")
+
 
 def evaluate_clause(clause,inpu): # checks whether given clause is true for the given value of the literals.
     for i in clause:
@@ -107,8 +113,8 @@ def vnd(formula,inpu,toggle):
         
         # open_list.remove(cur)
         if(goal_state(formula,cur)): # if current state is goal state
-            print("you have reached the goal.")
-            print(cur,count)
+            
+            print(f"You have reached the goal.\nno of states explored={count}\nfinal state={cur} ")
             fout.write(f"You have reached the goal.\nno of states explored={count}\nfinal state={cur} ")
             exitrec=1 
             return
@@ -143,6 +149,7 @@ def vnd(formula,inpu,toggle):
             if(toggle==no_var): # if the maximum no of toggling is reached, say that there is no solution to the problem.               
                 print('\n\n\n')
                 print("circuit is not satisfiable")
+                fout.write(f"circit is not satisfiable.\nGoal State=-\nNo of states explored= {count}")
                 exitrec=1
                 return
 
@@ -164,6 +171,7 @@ def beam_search(formula,inpu,beamwidth):
     global no_clauses,no_var   
     cur = inpu 
     prevmax=0 # maximum heuristic of the previous states.
+    print("current beam members are:")
     for i in cur:
         print(f"{i}:{no_of_clauses(formula,i)} ",end='')
         prevmax= max(prevmax,no_of_clauses(formula,i))
@@ -175,8 +183,9 @@ def beam_search(formula,inpu,beamwidth):
         count+=len(cur)
         for j in cur: 
             if(goal_state(formula,j)): # check whether the current state is the goal state.
-                print("you have reached the goal.")
+                print("\n\nyou have reached the goal.")
                 print(j,count)
+                fout.write(f"You have reached the goal\nGoal state= {j}\nNo of states explored={count}\n")
                 exitrec=1
                 return
             if(exitrec==1):
@@ -202,14 +211,15 @@ def beam_search(formula,inpu,beamwidth):
         for _ in range(beamwidth): # we need "beamlength" no of next neighbours.
             if(len(heap)==0):
                 break   
-            current_heap = copy.deepcopy(max(heap,key=itemgetter(1))[:beamwidth]) # i take the maximum among the neighours and add it to our next states list.
+            current_heap = copy.deepcopy(max(heap,key=itemgetter(1))) # i take the maximum among the neighours and add it to our next states list.
             heap.remove(current_heap) # remove the current max, so that i can get the next maximum in next iteration.
             next_states.append(current_heap[0])
 
             max_heuristic= max(max_heuristic,current_heap[1])
         
         if(max_heuristic<=prevmax): # if none of the neigbours have a heuristic value that is better than the current maximum, we terminate the search.
-            print(f"stuck in a local maxima, couldn't find the solution\n current max={prevmax}, maxstate={cur[-1]} ")
+            print(f"stuck in a local maxima, couldn't find the solution\n current max={prevmax}, maxstate={cur[-1]}\nNo of states explored= {count}")
+            fout.write(f"stuck in a local maxima, couldn't find the solution\nGoal state= -\nNo of states explored= {count} ")
             exitrec=1
             return
         if(exitrec==1):
@@ -222,14 +232,12 @@ def beam_search(formula,inpu,beamwidth):
 
 
 
-
-tenure= np.zeros(len(input_variables),dtype=int)
-
-def movegen_tabu(state,t):
-    global formu
-    global tenure
+#Movegen for Tabu with tenure t
+def movegen_tabu(state):
+    global tenure, formu
+    formula = formu
     best_state = ""
-    best_heu = -1
+    best_heu = -1 
     index=-1
     for i in range(len(state)):
         if(tenure[i] == 0):
@@ -237,32 +245,7 @@ def movegen_tabu(state,t):
                 new_state = state[:i] + "0" + state[i+1:]
             else:
                 new_state = state[:i] + "1" + state[i+1:]
-            # if(new_state not in closed):
-            
-            h = no_of_clauses(formu,new_state)
-            if(h>best_heu):
-                index = i
-                best_heu = h
-                best_state = copy.deepcopy(new_state)
-    if(best_state != ""):
-        return [best_state,best_heu,index]
-    else:
-        return 0
-    
-
-def movegen_restricted(state,t):
-    global tenure,formu
-    best_state = ""
-    best_heu = -1 
-    index = -1
-    for i in range(len(state)):
-        if(tenure[i] != 0): 
-            if(state[i] == '1'):
-                new_state = state[:i] + "0" + state[i+1:]
-            else:
-                new_state = state[:i] + "1" + state[i+1:]
-            # if(new_state not in closed):
-            h = no_of_clauses(formu,new_state)
+            h = no_of_clauses(formula,new_state)
             if(h>best_heu):
                 index = i
                 best_heu = h
@@ -272,68 +255,82 @@ def movegen_restricted(state,t):
     else:
         return 0
 
+
+states_explored=set()
+
+#Tabu search
 def tabu(state,t,formula):
-    global closed,ts 
+    global states_explored,ts,tenure 
     condition = True
+  
     best_heuristic = -1
     while(condition == True): 
         tf = time.time()
-        if(tf-ts > 10):
-            print("Goal state can't be reached by time\n")
-            fout.write("Goal state can't be reached\n")
-            return state       
-        
-        closed.append(state)        
+
+        if(tf-ts > 4):   #Termination condition
+            fout.write(f"stuck in a local maxima, couldn't find the solution\nGoal state= -\nNo of states explored= {len(states_explored)}")
+            print("Local maximum\n")
+            return state   
+
+        states_explored.add(state)        
         prev_heu = no_of_clauses(formula,state)
-        # prev_state = copy.deepcopy(state)
+        prev_state = copy.deepcopy(state)
         
-        if(prev_heu > best_heuristic):
-            # best_state = copy.deepcopy(prev_state)
+        if(prev_heu > best_heuristic):  #storing the best state 
             best_heuristic = prev_heu
-    
+
         if(goal_state(formula,state)):
             print("goal state is reached")
-            print(len(closed))
+            print(len(states_explored))
             print(state)
-            print(no_of_clauses(formula,state))
+            fout.write(f"You have reached the goal\nGoal state= {state}\nNo of states explored={len(states_explored)}\n")
             return
-        next_node = movegen_tabu(state, t)
+        next_node = movegen_tabu(state)
 
-        if(next_node != 0):
+        if(next_node != 0 ):
             state = copy.deepcopy(next_node[0])
             prev_heu = next_node[1]
-            for i in range(len(tenure)):
+            for i in range(len(state)):
                 if(tenure[i]!=0):
-                    tenure[i]-=1
+                    tenure[i] -= 1
             tenure[next_node[2]] = t
 
-        else:
-            res_node = movegen_restricted(state,t)
-            if(res_node != 0 ):
-                state = copy.deepcopy(res_node[0])
-                prev_heu = res_node[1]
-                for i in range(len(tenure)):
-                    if(tenure[i]!=0):
-                        tenure[i]-=1
-                tenure[res_node[2]] =t
-            else:
-                fout.write("goal state cannot be reached")
-                print("goal state cannot be reached")
-                return state
-
+        else: 
+            
+            print("local maximum")
+            fout.write(f"Tabu tenure is too high, couldn't find the solution\nGoal state= -\nNo of states explored= {len(states_explored)}")
+            return 
+    print("Goal state can't be reached\n")
+    fout.write("Goal state can't be reached\n")
     return state
-  
 
+
+
+tenure= np.zeros(len(input_variables),dtype=int)
 
 fout.write("\n\n\nVND\n")
+start_time=time.time()
 vnd(formu,input_variables,1)
+print("--- %s seconds ---" % (time.time() - start_time))
 exitrec= 0
-fout.write("\n\n\nBEAM SEARCH\n")
-print("\n\n\nBEAM SEARCH\n")
-beam_search(formu,[input_variables],2)
+# beam_search(formu,[input_variables],2)
+# print("--- %s seconds ---" % (time.time() - start_time))
+exitrec=0
 
 
-fout.write(f"\n\n\nTABU SEARCH\n")
-print("\n\n\nTABU SEARCH\n")
-ts= time.time()
-tabu(input_variables,2,formu)
+parent={} #parent of a node
+
+open_list = [] #open list
+
+fout.write(f"\n\n\nBEAM SEARCH with width={beam_width} \n")
+print(f"\n\n\nBEAM SEARCH with width={beam_width} \n")
+start_time=time.time()
+beam_search(formu,[input_variables],beamwidth=beam_width)
+print("--- %s seconds ---" % (time.time() - start_time))
+exitrec=0
+fout.write(f"\n\n\nTABU SEARCH with tenure={tabu_tenure}\n")
+print(f"\n\n\nTABU SEARCH with tenure={tabu_tenure}\n")
+ts=time.time()
+start_time=time.time()
+tabu(input_variables,tabu_tenure,formu)
+print("--- %s seconds ---" % (time.time() - start_time))
