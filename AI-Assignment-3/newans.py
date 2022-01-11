@@ -237,7 +237,7 @@ def movegen_tabu(state):
     global tenure, formu
     formula = formu
     best_state = ""
-    best_heu = -1 
+    best_heu = -1
     index=-1
     for i in range(len(state)):
         if(tenure[i] == 0):

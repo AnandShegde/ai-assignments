@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  11 JAN 2022 22:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.8.4)  11 JAN 2022 22:28
 entering extended mode
 **c:/Users/tkhal/Documents/GitHub/ai-assignments/AI-Assignment-3/AI_Assignment_Report.tex
 (c:/Users/tkhal/Documents/GitHub/ai-assignments/AI-Assignment-3/AI_Assignment_Report.tex
@@ -219,70 +219,70 @@ File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
- [1] [2] [3]
-<BeamSearch.jpg, id=25, 1028.04076pt x 551.661pt>
+ [1] [2] [3] [4]
+<BeamSearch.jpg, id=28, 1028.04076pt x 551.661pt>
 File: BeamSearch.jpg Graphic file (type jpg)
 <use BeamSearch.jpg>
-Package pdftex.def Info: BeamSearch.jpg  used on input line 136.
+Package pdftex.def Info: BeamSearch.jpg  used on input line 180.
 (pdftex.def)             Requested size: 308.41461pt x 165.49957pt.
- [4 <./BeamSearch.jpg>]
-<Table2.jpg, id=29, 266.79675pt x 133.6995pt>
+ [5 <./BeamSearch.jpg>]
+<Table2.jpg, id=33, 266.79675pt x 133.6995pt>
 File: Table2.jpg Graphic file (type jpg)
 <use Table2.jpg>
-Package pdftex.def Info: Table2.jpg  used on input line 141.
+Package pdftex.def Info: Table2.jpg  used on input line 185.
 (pdftex.def)             Requested size: 266.79608pt x 133.69916pt.
-<TabuSearch.jpg, id=30, 1047.915pt x 531.1845pt>
+<TabuSearch.jpg, id=34, 1047.915pt x 531.1845pt>
 File: TabuSearch.jpg Graphic file (type jpg)
 <use TabuSearch.jpg>
-Package pdftex.def Info: TabuSearch.jpg  used on input line 144.
+Package pdftex.def Info: TabuSearch.jpg  used on input line 188.
 (pdftex.def)             Requested size: 366.77574pt x 185.91734pt.
 
-Overfull \hbox (21.77574pt too wide) in paragraph at lines 139--145
+Overfull \hbox (21.77574pt too wide) in paragraph at lines 183--189
 [] 
  []
 
-[5 <./Table2.jpg> <./TabuSearch.jpg>]
-<Table1.jpg, id=35, 607.068pt x 84.315pt>
+[6 <./Table2.jpg> <./TabuSearch.jpg>]
+<Table1.jpg, id=38, 607.068pt x 84.315pt>
 File: Table1.jpg Graphic file (type jpg)
 <use Table1.jpg>
-Package pdftex.def Info: Table1.jpg  used on input line 150.
+Package pdftex.def Info: Table1.jpg  used on input line 194.
 (pdftex.def)             Requested size: 424.9447pt x 59.02008pt.
-<VND.png, id=36, 462.528pt x 346.896pt>
+<VND.png, id=39, 462.528pt x 346.896pt>
 File: VND.png Graphic file (type png)
 <use VND.png>
-Package pdftex.def Info: VND.png  used on input line 155.
+Package pdftex.def Info: VND.png  used on input line 199.
 (pdftex.def)             Requested size: 462.52686pt x 346.89514pt.
 
-Overfull \hbox (79.9447pt too wide) in paragraph at lines 148--157
+Overfull \hbox (79.9447pt too wide) in paragraph at lines 192--201
 []
  []
 
 
-Overfull \hbox (117.52686pt too wide) in paragraph at lines 148--157
+Overfull \hbox (117.52686pt too wide) in paragraph at lines 192--201
 [] 
  []
 
-[6 <./Table1.jpg> <./VND.png>]
+[7 <./Table1.jpg> <./VND.png>]
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 162.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 206.
 
-Overfull \hbox (3.24353pt too wide) in paragraph at lines 162--164
+Overfull \hbox (3.24353pt too wide) in paragraph at lines 206--208
 []\OT1/cmr/m/n/10 If there ex-ist a so-lu-tion to reach
  []
 
-[7] [8] (AI_Assignment_Report.aux) ) 
+[8] [9] (AI_Assignment_Report.aux) ) 
 Here is how much of TeX's memory you used:
  3281 strings out of 478870
  49965 string characters out of 2848837
- 349231 words of memory out of 3000000
+ 352231 words of memory out of 3000000
  21140 multiletter control sequences out of 15000+600000
  406459 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  61i,5n,70p,350b,248s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\tkhal\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tkhal/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on AI_Assignment_Report.pdf (10 pages, 416749 bytes).
+Output written on AI_Assignment_Report.pdf (11 pages, 418377 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
+ 100 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

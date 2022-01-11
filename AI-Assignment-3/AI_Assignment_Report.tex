@@ -43,7 +43,7 @@ The Start node is a randomly generated n bit string which will be
 a part of the state space that will be 
 given in 'input.txt' file.
 \\The Goal Node is a part of the state space that represents the final/goal state to be reached through
-our algorithm .
+our algorithm. Goal Node satisfies all the clauses in the given formula.
 \\One such example is the following :
 \\For $n=5$ i.e. 5 variables,
 \\Start Node :
@@ -75,7 +75,51 @@ def move\_gen(state,bits\_toggled):
     \\ \hspace*{70pt}neighbors.append(new)
     \vspace{2pt}
     \\ \hspace*{20pt}return neighbors
-
+\subsection*{movegen\_tabu function}
+    \vspace{5pt}
+    def movegen\_tabu(state):
+    \vspace{5pt}
+        \vspace{2pt}
+        \\ \hspace*{20pt}global tenure, formu
+        \vspace{2pt}
+        \\ \hspace*{20pt}formula = formu
+        \vspace{2pt}
+        \\ \hspace*{20pt}best\_state = ""
+        \vspace{2pt}
+        \\ \hspace*{20pt}best\_heu = -1 
+        \vspace{2pt}
+        \\ \hspace*{20pt}index=-1
+        \vspace{2pt}
+        \\ \hspace*{20pt}for i in range(len(state)):
+        \vspace{2pt}
+        \\ \hspace*{30pt}if(tenure[i] == 0):
+        \vspace{2pt}
+        \\ \hspace*{40pt}if(state[i] == '1'):
+        \vspace{2pt}
+        \\ \hspace*{50pt}new\_state = state[:i] + "0" + state[i+1:]
+        \vspace{2pt}
+        \\ \hspace*{40pt}else:
+        \vspace{2pt}
+        \\ \hspace*{50pt}new\_state = state[:i] + "1" + state[i+1:]
+        \vspace{2pt}
+        \\ \hspace*{40pt}h = no\_of\_clauses(formula,new\_state)
+        \vspace{2pt}
+        \\ \hspace*{40pt}if(h$>$best\_heu):
+        \vspace{2pt}
+        \\ \hspace*{50pt}index = i
+        \vspace{2pt}
+        \\ \hspace*{50pt}best\_heu = h
+        \vspace{2pt}
+        \\ \hspace*{50pt}best\_state = copy.deepcopy(new\_state)
+        \vspace{2pt}
+        \\ \hspace*{20pt}if(best\_state != ""):
+        \vspace{2pt}
+        \\ \hspace*{30pt}return [best\_state,best\_heu,index]
+        \vspace{2pt}
+        \\ \hspace*{20pt}else:
+        \vspace{2pt}
+        \\ \hspace*{30pt}return 0
+    
 \subsection*{goal\_state function}
     \vspace{5pt}
     def goal\_state(formula,inpu):
@@ -129,7 +173,7 @@ If the heuristic value is n , i.e. no. of clauses, then that node is our goal st
 %we have to make the neighborhood denser which can be achieved 
 %by increasing the no. of bits to be toggled .
 \section{Beam Search Analysis}
-The time taken to reach the goal state increases exponentially as the input size increases.
+The time taken to reach the goal state increases as the input size increases.
 As the width of the beam search is increased, the probability of getting the best node also increases because the more the
 nodes get explored, more is the chance of finding the goal state.
 \\Also , as the width of the beam search is increased , we see that the computation time and space complexity of the beam search to reach the goal state also increases.
