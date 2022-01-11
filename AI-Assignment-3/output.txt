@@ -1,53 +1,23 @@
-the initial guess=1011 its heuristic= 13
+no of clauses= 10
+no of variables=30
+the initial guess=010000100110100100101111001100 
+its heuristic= 8
 
 
 VND
 You have reached the goal.
-no of states explored=2
-final state=0011 
+no of states explored=3
+final state=110100100110100100101111001100 
 
 
 BEAM SEARCH with width=1 
+You have reached the goal
+Goal state= 110100100110100100101111001100
+No of states explored=6
 
 
 
-TABU SEARCH with tenure={_}
-
-
-
-VND
-
-
-
-BEAM SEARCH with width=2 
-
-
-
-TABU SEARCH with tenure={_}
-Goal state can't be reached
-
-
-
-VND
-
-
-
-BEAM SEARCH with width=3 
-
-
-
-TABU SEARCH with tenure={_}
-Goal state can't be reached
-
-
-
-VND
-
-
-
-BEAM SEARCH with width=4 
-
-
-
-TABU SEARCH with tenure={_}
-Goal state can't be reached
+TABU SEARCH with tenure=3
+You have reached the goal
+Goal state= 110100100110100100101111001100
+No of states explored=3

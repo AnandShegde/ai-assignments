@@ -27,7 +27,7 @@
 \pagenumbering{arabic}
 \section{Problem Statement}
 We are given the question to find the satisfiability of a Uniform 4-SAT \{which is a family of SAT problems distribution obtained from generating 4-CNF formulae randomly.\}
-\\So , if all the clauses are true , then we can prove the satisfability of a formula .
+\\So , if all the clauses are true , then we can prove the satisfability of a formula.
 \vspace{10pt}
 \section{Approach}
 The basic approach we used for the A.I assignment is to use the concept \\of Exploration and 
@@ -130,36 +130,44 @@ If the heuristic value is n , i.e. no. of clauses, then that node is our goal st
 %by increasing the no. of bits to be toggled .
 \section{Beam Search Analysis}
 The time taken to reach the goal state increases exponentially as the input size increases.
-\\Also , as the width of the beam search is increased , we see that the computation time 
-of the beam search to reach the goal state also increases.
+As the width of the beam search is increased, the probability of getting the best node also increases because the more the
+nodes get explored, more is the chance of finding the goal state.
+\\Also , as the width of the beam search is increased , we see that the computation time and space complexity of the beam search to reach the goal state also increases.
+\\\includegraphics[scale=0.3]{BeamSearch.jpg}
+\newpage
 \section{Tabu Search Analysis}
+We have plotted the following results for Tabu Search with different values of Tabu Tenure .
+\vspace*{10pt}
+\\\hspace*{50pt}\includegraphics{Table2.jpg}
+\\\includegraphics[scale=0.35]{TabuSearch.jpg}
 \newpage
 \section{Analysis \& Observations}
 \vspace{5pt}
-Based on observation , we have plotted the following graphs :
-%\\\includegraphics[scale=0.9]{Graph.jpg}
+Based on observation , we have compiled the following data pertaining to VND, Beam Search and Tabu Search :
+\vspace*{10pt}
+\\\includegraphics[scale=0.7]{Table1.jpg}
+\vspace*{10pt}
+\\In the above table , the green cells represents success of finding the goal state and the red cells represents the failure of reaching to the goal state.
+\\
 %\includegraphics{Graph1.jpg}
-\vspace{5pt}
-\\From the above graphs , we have analysed that the best first search algorithm always finds the best and optimal solution
-but at the cost of time consumed is high as BFS has a time complexity of O($b^d$) .
 \newpage
-\section{Results}
-\vspace{20pt}
-The following conclusions have been made after evaluation of our program :
-\begin{description}
-    \item[States Explored :]The Hill-Climbing algorithm in general will have lesser no. of states explored than that of BFS .
-    In the worst scenario, the best first search algorithm will explore all the states but Hill-Climbing algorithm will explore uptill $O(bd)$ 
-    ,\\ where b = the maximum beam width 
-    \\\hspace*{29pt}d = the depth of the search graph from the start state.
-    \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
-    \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
-    but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
-    \item[Completeness :] The Best First Search Algorithm is Complete as it explores all the states sooner or later. But the Hill Climbing Algorithm is not complete. As it almost always gets stuck in local minima if we do not come up with a really good heuristic.
-\end{description}
-\vspace{20pt}
+%\section{Results}
+%\vspace{20pt}
+%The following conclusions have been made after evaluation of our program :
+%\begin{description}
+%    \item[States Explored :]The Hill-Climbing algorithm in general will have lesser no. of states explored than that of BFS .
+%    In the worst scenario, the best first search algorithm will explore all the states but Hill-Climbing algorithm will explore uptill $O(bd)$ 
+ %   ,\\ where b = the maximum beam width 
+ %   \\\hspace*{29pt}d = the depth of the search graph from the start state.
+%    \item[Time Complexity :] The time complexity for the Best First Search Algorithm is $O(b^d)$ and for Hill-Climbing algorithm it is $O(bd)$.
+%    \item[Optimal Solution :] For reaching to the optimal solution , the Best First Search Algorithm is the better algorithm as it explores all the nodes/states
+%    but in the case of Hill-Climbing algorithm it doesn't explore all the states and it may get stuck in the local extremum while finding the goal state . 
+%    \item[Completeness :] The Best First Search Algorithm is Complete as it explores all the states sooner or later. But the Hill Climbing Algorithm is not complete. As it almost always gets stuck in local minima if we do not come up with a really good heuristic.
+%\end{description}
+%\vspace{20pt}
 \subsection*{Conclusion}
 The Best First Search Algorithm is the more optimal choice as it helps to solve the given problem
-efficiently . 
+efficiently .
 \vspace{5pt}
 \\Although it takes more time than the Hill-Climbing algorithm, it ensures that the best solution
 has been found to reach the goal state by exploring all the nodes/states in $O(b^d)$ , whereas in Hill-Climbing algorithm

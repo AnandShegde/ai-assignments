@@ -139,9 +139,7 @@ def vnd(formula,inpu,toggle):
         if cur_list in heap: 
             heap.remove(cur_list)
         
-              
         current_heap = copy.deepcopy(max(heap,key=itemgetter(1))) # get the max among the neigbours.
-         
         print(f"maximum among the neighbours={current_heap}")
 
         # if there is a better node than current, its no_of_clauses will be greater than the current then we go there.  else just increase the no of toggling and repeat.
@@ -149,7 +147,7 @@ def vnd(formula,inpu,toggle):
             if(toggle==no_var): # if the maximum no of toggling is reached, say that there is no solution to the problem.               
                 print('\n\n\n')
                 print("circuit is not satisfiable")
-                fout.write(f"circit is not satisfiable.\nGoal State=-\nNo of states explored= {count}")
+                fout.write(f"circuit is not satisfiable.\nGoal State=-\nNo of states explored= {count}")
                 exitrec=1
                 return
 
