@@ -1,7 +1,9 @@
 from copy import deepcopy
 from dis import dis
-from math import dist
-from turtle import distance
+# =============================================================================
+# from math import dist
+# from turtle import distance
+# =============================================================================
 import numpy as np
 import matplotlib.pyplot as plt
 import time,sys,random
@@ -10,9 +12,7 @@ def floatconv(l, dtype=float):
     return list(map(dtype, l))
 
 
-# plt.ion()
-# print()
-# print(len(distances))
+
 
 #greedy.
 def plot_tour(point_pairs,title= "Tour"):
@@ -38,27 +38,19 @@ def greedy(start=35):
         if(len(point_pairs)>98):
             break
         while(True):
-            ind = min(distances[i],key=distances[i].get)
-            
+            ind = min(distances[i],key=distances[i].get)            
             mindist= distances[i][ind]        
-            
             del distances[i][ind]
             if(ind not in point_pairs and i!= ind and ind!=start):
                 if(i in point_pairs):
                     if(point_pairs[i]!=ind):
                         point_pairs[ind] = i
-
                         cost += mindist
-                        # print(mindist)
-                        # print(cost)
                         i=ind
                         break
                 else:
-
                     point_pairs[ind]=i
                     cost += mindist
-                    # print(mindist)
-                    # print(cost)
                     i= ind
                     break
 
@@ -84,7 +76,7 @@ def greedy(start=35):
  
     #plt.savefig("greedy.jpg")
 
-def update_pheromone(current,paths,costs,evoparation_rate=0.9,Q= 2):
+def update_pheromone(current,paths,costs,evoparation_rate=1,Q= 2):
     current = np.array(current)
     current = current*evoparation_rate
     count =0
@@ -97,10 +89,10 @@ def update_pheromone(current,paths,costs,evoparation_rate=0.9,Q= 2):
     return current 
 
 
-def aco(alpha=3,beta=3,no_of_ants=0,evoporation_rate=0.1,old=None):
+def aco(alpha=3,beta=3.2,no_of_ants=15,evoporation_rate=0.1,old=None):
     global distanc,points,path_min
     mincost= None
-    
+
     
     distances= np.array(distanc)  # distances between the cities. 2D matrix 
                                 # distances[i,j] denotes distance from i to j.
@@ -125,7 +117,7 @@ def aco(alpha=3,beta=3,no_of_ants=0,evoporation_rate=0.1,old=None):
         pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 1 )
       
         
-    while(time.time()-ts<250): # the ants will make "no_of_iterations" tours
+    while(time.time()-ts<100): # the ants will make "no_of_iterations" tours
         paths = []
         cost = np.zeros((no_of_ants,), dtype = float)# the tour cost of each ant.
         for i in range(no_of_ants): # for each ant make a tour.
@@ -175,12 +167,12 @@ def aco(alpha=3,beta=3,no_of_ants=0,evoporation_rate=0.1,old=None):
             print(mincost)
             plot_tour(path,title= f"ant {index_min} {cost[index_min]}")
         plot_tour(path,title= f"ant {index_min} {cost[index_min]}") 
-            
+        
         
         
         print(time.time()-ts)
-                
-                
+    print(path)            
+    plot_tour(path_min,title=f"cost={ mincost}")           
             
                 
     
@@ -194,7 +186,7 @@ if __name__=='__main__':
     if(len(sys.argv)==2):
         fi= open(sys.argv[1],"r")
     else:
-        fi= open("D:/4th sem/ai/ai-assignments/AI-Assignment-4/euc_100.txt","r")
+        fi= open("euc_100.txt","r")
     typ = fi.readline()
     no_of_nodes= int(fi.readline())
 
@@ -206,6 +198,9 @@ if __name__=='__main__':
 
 
     distanc= []
+    ponts = np.array(points) 
+    plt.scatter(ponts[:,0],ponts[:,1])
+    time.sleep(2)
     for i in range(no_of_nodes):
         dis= (floatconv(fi.readline().split()))
         dic={}
@@ -214,6 +209,7 @@ if __name__=='__main__':
         distanc.append(dic)
 
     old = greedy()
+    time.sleep(2)
     
 
     aco(old = old)
