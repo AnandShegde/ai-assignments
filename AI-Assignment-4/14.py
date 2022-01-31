@@ -104,7 +104,7 @@ def greedy(start=35):
  
     #plt.savefig("greedy.jpg")
 
-def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 2):
+def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 3):
     current = np.array(current)
     current = current*evoparation_rate
     count =0
@@ -117,7 +117,7 @@ def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 2):
     return current 
 
 
-def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99):
+def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999,Q=50):
     global distanc,points,path_min
     mincost= None
 
@@ -170,7 +170,7 @@ def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99
                     
                     if(k!=cur):
                         #print((1/distances[cur][allowed[k]]),pheromone[cur][allowed[k]])
-                        probablity[k,0] = ((1/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
+                        probablity[k,0] = ((70/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
                         psum = psum + probablity[k,0]
                     else:
                         probablity[k,0]= 0
@@ -188,7 +188,7 @@ def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99
             cost[i]+=distances[new][start]
             path[start]= cur # make the parent of start as the last one.
             paths.append(path)
-            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate)
+            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=Q)
         
         values = cost 
         
@@ -196,6 +196,7 @@ def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99
         path = paths[index_min]
         
         if(mincost==None or mincost>=cost[index_min]):
+            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=4*no_of_ants*Q)
             mincost =  cost[index_min]
             path_min = path
             print("mincost")
@@ -216,11 +217,14 @@ def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99
         for j in range(i):
             print("ofsoije")
             path = ans[:]
+        
             path = switch(path, j, i)
+           
             cost = find_cost(path,distances)
             
             
             if mincost>cost:
+                p
                 mincost = cost
                 ans = path
                 plot_tour_list(ans, points, f"Cost = {cost} ")
