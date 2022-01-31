@@ -15,18 +15,42 @@ def floatconv(l, dtype=float):
 
 
 #greedy.
+def plot_tour_list(tour,points,title= "Tour"):
+    points= np.array(points)
+    plt.scatter(points[:,0],points[:,1])
+    for x in range(len(tour)-1):
+        i = tour[x]
+        j = tour[x+1]
+        plt.plot([points[i,0],points[j,0]],[points[i,1],points[j,1]])
+    i= tour[0]
+    j= tour[-1]
+    plt.plot([points[i,0],points[j,0]],[points[i,1],points[j,1]])
+    plt.title(title)
+    plt.show()
+    
+def find_cost(tour,distances):
+    cost= 0
+    for x in range(len(tour)-1):
+        cost += distances[tour[x]][tour[x+1]]
+    cost += distances[tour[-1]][tour[0]]
+    return cost
+    
+
+    
 def plot_tour(point_pairs,title= "Tour"):
     global points
-    
-    
     plt.scatter(points[:,0],points[:,1])
-    
     for i in point_pairs:
         j= point_pairs[i]
         plt.plot([points[i,0],points[j,0]],[points[i,1],points[j,1]])   
     plt.title(title)
     plt.show()
     
+def switch(path, i, j):
+    temp = path[i:j]
+    for k in range(i, j):
+        path[k] = temp[j-k-1]
+    return path
 
 def greedy(start=35):
     global distanc,points
@@ -59,14 +83,18 @@ def greedy(start=35):
     points= np.array(points)
 
 
-    plt.scatter(points[:,0],points[:,1])
-    plt.title(f"cost={cost}")
+# =============================================================================
+#     plt.scatter(points[:,0],points[:,1])
+#     plt.title(f"cost={cost}")
+# =============================================================================
     print(cost)
 
 
-    for i in point_pairs:
-        j= point_pairs[i]
-        plt.plot([points[i,0],points[j,0]],[points[i,1],points[j,1]])
+# =============================================================================
+#     for i in point_pairs:
+#         j= point_pairs[i]
+#         plt.plot([points[i,0],points[j,0]],[points[i,1],points[j,1]])
+# =============================================================================
     x={}
     x["path"]= point_pairs
     x['cost']= cost
@@ -76,7 +104,7 @@ def greedy(start=35):
  
     #plt.savefig("greedy.jpg")
 
-def update_pheromone(current,paths,costs,evoparation_rate=1,Q= 2):
+def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 2):
     current = np.array(current)
     current = current*evoparation_rate
     count =0
@@ -89,7 +117,7 @@ def update_pheromone(current,paths,costs,evoparation_rate=1,Q= 2):
     return current 
 
 
-def aco(alpha=3,beta=3.2,no_of_ants=15,evoporation_rate=0.1,old=None):
+def aco(alpha=1,beta=3.2,no_of_ants=15,old=None,maxtime=60,evoparation_rate=0.99):
     global distanc,points,path_min
     mincost= None
 
@@ -113,11 +141,17 @@ def aco(alpha=3,beta=3.2,no_of_ants=15,evoporation_rate=0.1,old=None):
         for j in range(no_of_vertices):
             new.append(0.1) 
         pheromone.append(new)
+# =============================================================================
     if(old!=None):
-        pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 1 )
-      
+         pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 1 )
+       
+# =============================================================================
+#    for i in range(len(points)):
+#        old = greedy(i)
+#        pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 0.05 )
         
-    while(time.time()-ts<100): # the ants will make "no_of_iterations" tours
+        
+    while(time.time()-ts<maxtime): # the ants will make "no_of_iterations" tours
         paths = []
         cost = np.zeros((no_of_ants,), dtype = float)# the tour cost of each ant.
         for i in range(no_of_ants): # for each ant make a tour.
@@ -151,29 +185,45 @@ def aco(alpha=3,beta=3.2,no_of_ants=15,evoporation_rate=0.1,old=None):
                 path[new] = cur
                 
                 cur = new
-            
+            cost[i]+=distances[new][start]
             path[start]= cur # make the parent of start as the last one.
             paths.append(path)
-            pheromone = update_pheromone(pheromone,paths,cost)
+            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate)
         
         values = cost 
         
         index_min = min(range(len(values)), key=values.__getitem__)
         path = paths[index_min]
+        
         if(mincost==None or mincost>=cost[index_min]):
             mincost =  cost[index_min]
             path_min = path
             print("mincost")
             print(mincost)
+            print(find_cost(list(path.values()), distances))
             plot_tour(path,title= f"ant {index_min} {cost[index_min]}")
-        plot_tour(path,title= f"ant {index_min} {cost[index_min]}") 
+        #plot_tour(path,title= f"ant {index_min} {cost[index_min]}") 
         
         
         
         print(time.time()-ts)
-    print(path)            
+    
+        
+    print(list(path.values()))
+    ans= list(path.values())
     plot_tour(path_min,title=f"cost={ mincost}")           
+    for i in range(len(points)):
+        for j in range(i):
+            print("ofsoije")
+            path = ans[:]
+            path = switch(path, j, i)
+            cost = find_cost(path,distances)
             
+            
+            if mincost>cost:
+                mincost = cost
+                ans = path
+                plot_tour_list(ans, points, f"Cost = {cost} ")
                 
     
     
@@ -200,7 +250,7 @@ if __name__=='__main__':
     distanc= []
     ponts = np.array(points) 
     plt.scatter(ponts[:,0],ponts[:,1])
-    time.sleep(2)
+   
     for i in range(no_of_nodes):
         dis= (floatconv(fi.readline().split()))
         dic={}
@@ -209,7 +259,8 @@ if __name__=='__main__':
         distanc.append(dic)
 
     old = greedy()
-    time.sleep(2)
+    print(old['path'].values())
+ 
     
 
     aco(old = old)
