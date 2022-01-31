@@ -52,6 +52,18 @@ def switch(path, i, j):
         path[k] = temp[j-k-1]
     return path
 
+def switch3(path, i, j, k):
+    temp = []
+    for x in range(0, i):
+        temp.append(path[x])
+    for x in range(j, k):
+        temp.append(path[x])
+    for x in range(i, j):
+        temp.append(path[x])
+    for x in range(k, len(path)):
+        temp.append(path[x])
+    return temp
+
 def greedy(start=35):
     global distanc,points
     distances = deepcopy(distanc)
@@ -117,7 +129,7 @@ def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 3):
     return current 
 
 
-def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999,Q=50):
+def aco(alpha=1,beta=5.5,no_of_ants=20,old=None,maxtime=99,evoparation_rate=0.9999,Q=50):
     global distanc,points,path_min
     mincost= None
 
@@ -170,7 +182,7 @@ def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999
                     
                     if(k!=cur):
                         #print((1/distances[cur][allowed[k]]),pheromone[cur][allowed[k]])
-                        probablity[k,0] = ((70/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
+                        probablity[k,0] = ((75/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
                         psum = psum + probablity[k,0]
                     else:
                         probablity[k,0]= 0
@@ -196,7 +208,7 @@ def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999
         path = paths[index_min]
         
         if(mincost==None or mincost>=cost[index_min]):
-            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=4*no_of_ants*Q)
+            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=3.5*no_of_ants*Q)
             mincost =  cost[index_min]
             path_min = path
             print("mincost")
@@ -210,12 +222,12 @@ def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999
         print(time.time()-ts)
     
         
-    print(list(path.values()))
-    ans= list(path.values())
+    print(list(path_min.values()))
+    ans= list(path_min.values())
     plot_tour(path_min,title=f"cost={ mincost}")           
     for i in range(len(points)):
         for j in range(i):
-            print("ofsoije")
+            
             path = ans[:]
         
             path = switch(path, j, i)
@@ -224,14 +236,40 @@ def aco(alpha=1,beta=5,no_of_ants=20,old=None,maxtime=60,evoparation_rate=0.9999
             
             
             if mincost>cost:
-                p
                 mincost = cost
                 ans = path
                 plot_tour_list(ans, points, f"Cost = {cost} ")
+       
+    print(find_cost(ans, distances))
+          
+    for i in range(len(points)):
+        for j in range(i):
+            for k in range(j):
+                path= ans[:]
+                path = switch3(path, k, j, i)
+                cost = find_cost(path, distances)
                 
+                if(mincost>cost):
+                    mincost= cost
+                    ans= path
+                    plot_tour_list(ans, points,f"Cost = {cost} ")
     
     
-    
+    for i in range(len(points)):
+        for j in range(i):
+            
+            path = ans[:]
+        
+            path = switch(path, j, i)
+           
+            cost = find_cost(path,distances)
+            
+            
+            if mincost>cost:
+                mincost = cost
+                ans = path
+                plot_tour_list(ans, points, f"Cost = {cost} ")
+            
     
     
 
