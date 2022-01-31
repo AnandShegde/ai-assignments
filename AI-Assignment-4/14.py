@@ -116,7 +116,7 @@ def greedy(start=35):
  
     #plt.savefig("greedy.jpg")
 
-def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 3):
+def update_pheromone(current,paths,costs,evoparation_rate=0.9999,Q= 90):
     current = np.array(current)
     current = current*evoparation_rate
     count =0
@@ -129,11 +129,10 @@ def update_pheromone(current,paths,costs,evoparation_rate=0.99,Q= 3):
     return current 
 
 
-def aco(alpha=1,beta=5.5,no_of_ants=20,old=None,maxtime=99,evoparation_rate=0.9999,Q=50):
+def aco(alpha=2,beta=5,no_of_ants=69,old=None,maxtime=100,evoparation_rate=0.9999,Q=100):
     global distanc,points,path_min
     mincost= None
 
-    
     distances= np.array(distanc)  # distances between the cities. 2D matrix 
                                 # distances[i,j] denotes distance from i to j.
     
@@ -155,7 +154,7 @@ def aco(alpha=1,beta=5.5,no_of_ants=20,old=None,maxtime=99,evoparation_rate=0.99
         pheromone.append(new)
 # =============================================================================
     if(old!=None):
-         pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 1 )
+         pheromone = update_pheromone( pheromone,paths= [old['path']], costs = [old['cost']],Q= 100 )
        
 # =============================================================================
 #    for i in range(len(points)):
@@ -182,7 +181,7 @@ def aco(alpha=1,beta=5.5,no_of_ants=20,old=None,maxtime=99,evoparation_rate=0.99
                     
                     if(k!=cur):
                         #print((1/distances[cur][allowed[k]]),pheromone[cur][allowed[k]])
-                        probablity[k,0] = ((75/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
+                        probablity[k,0] = ((Q*Q/distances[cur][allowed[k]])**(beta))*(pheromone[cur][allowed[k]]**(alpha))
                         psum = psum + probablity[k,0]
                     else:
                         probablity[k,0]= 0
@@ -207,8 +206,9 @@ def aco(alpha=1,beta=5.5,no_of_ants=20,old=None,maxtime=99,evoparation_rate=0.99
         index_min = min(range(len(values)), key=values.__getitem__)
         path = paths[index_min]
         
+        
         if(mincost==None or mincost>=cost[index_min]):
-            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=3.5*no_of_ants*Q)
+            pheromone = update_pheromone(pheromone,paths,cost,evoparation_rate=evoparation_rate,Q=3.4*no_of_ants*Q)
             mincost =  cost[index_min]
             path_min = path
             print("mincost")
