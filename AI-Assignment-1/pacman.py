@@ -8,6 +8,8 @@ from numpy.core.fromnumeric import shape
 dfs_stop= False
 
 
+
+
 sys.setrecursionlimit(10**6)
 
 starttime= time.time()
@@ -279,6 +281,7 @@ graph_input= [] #this stores the input given in as a list of lists
 #reading file and adding it to graph_input
 file = open("input.txt","r")
 lines= file.readlines()
+
 m=len(lines)-1 #no of rows substract 1 because 1st line is bdd
 bdd= int(lines[0]) #bfs/dfs/dfid
 for i in range(1,m+1):
